@@ -2,6 +2,7 @@
 import { fetchTemp } from '../utils'
 import { useState, useEffect } from "react";
 import ProductList from './ProductList'; 
+import ProductList1 from './ProductList1'; 
 import Contact from './Contact'; 
 import Design from './Design';
 import Review from './Review';
@@ -9,6 +10,7 @@ import Rate from './Rate';
 import Carousel from './Carousel';
 import BrandCarousel from './BrandCarousel';
 import Image from 'next/image';
+import Catslider from './Catslider';
 
 
 
@@ -112,7 +114,7 @@ const Body = () => {
 
         </div> */}
 
-<Carousel />
+ 
 
         <style
           type="text/css"
@@ -143,7 +145,9 @@ const Body = () => {
 
         <div id="usp-scroll-to"></div>
 
+        <Catslider />
         <ProductList />
+        <ProductList1 />
         <Design />
         <BrandCarousel />
 

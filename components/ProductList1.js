@@ -4,9 +4,8 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import CarCard from './CarCard'; // Ensure this component exists
 
-const YourComponent = () => {
-    const [categories, setCategories] = useState([]);
-    const [allTemps, setAllTemps] = useState({}); // Stores products per category
+const YourComponent = () => { 
+    const [allTemps, setAllTemps] = useState(); // Stores products per category
 
     useEffect(() => {
         fetchCategories();
@@ -14,11 +13,10 @@ const YourComponent = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await fetch('/api/category');
+            const response = await fetch('/api/products');
             if (response.ok) {
-                const categoryData = await response.json();
-                setCategories(categoryData);
-                fetchProducts(categoryData);
+                const data = await response.json(); 
+                setAllTemps(data);
             } else {
                 console.error('Failed to fetch categories');
             }
@@ -27,31 +25,7 @@ const YourComponent = () => {
         }
     };
 
-    const fetchProducts = async (categories) => {
-        try {
-            const productsByCategory = {};
-
-            await Promise.all(
-                categories.map(async (category) => {
-                    const categoryId = category.name; // Adjust based on API response
-                    const response = await fetch(`/api/products1/${categoryId}`);
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        productsByCategory[categoryId] = data;
-                    } else {
-                        console.error(`Failed to fetch products for category: ${categoryId}`);
-                        productsByCategory[categoryId] = [];
-                    }
-                })
-            );
-
-            setAllTemps(productsByCategory);
-        } catch (error) {
-            console.error('Error fetching products:', error);
-        }
-    };
-
+ 
  
 
 
@@ -62,7 +36,7 @@ const YourComponent = () => {
                 <div className="ProductTile-SliderContainer ProductTile-SliderContainer--YMAL">
 
                     {allTemps && Object.keys(allTemps).length > 0 ? (
-                        Object.keys(allTemps).map((category) => (
+                        
                             <>
 
                                 <style dangerouslySetInnerHTML={{
@@ -77,7 +51,7 @@ const YourComponent = () => {
                                 <div className="  ProductTile-SliderContainer ProductTile-SliderContainer--YMAL px-3" data-product-list-category="ymal-slider">
 
                                     <div className="ProductTile-SliderContainer-Title br_text-3xl-serif br_text-[#333] " style={{ textAlign: "left", textAlign: "left", fontSize: "1.3em", fontWeight: "bold", fontFamily: 'Manrope' }}>  
-                                        {category}
+                                        All
                                         <span style={{ position: "absolute", right: "1em" }}><svg
                                             fill="#000000"
                                             viewBox="0 0 24 24"
@@ -105,7 +79,7 @@ const YourComponent = () => {
                                         </span>
                                     </div>
 
-                                    {allTemps[category].length > 0 ? (
+                                    {allTemps.length > 0 ? (
                                         <section className=' mb-5' style={{ maxWidth: "100%" }}>
                                             <Swiper spaceBetween={5} loop breakpoints={{
                                                 150: {
@@ -116,7 +90,7 @@ const YourComponent = () => {
                                                 },
                                             }}>
                                                 <div className="home__cars-wrapper">
-                                                    {allTemps[category].map((temp) => (
+                                                    {allTemps.map((temp) => (
                                                         <SwiperSlide key={temp.id}>
                                                             <CarCard temp={temp} />
                                                         </SwiperSlide>
@@ -132,7 +106,7 @@ const YourComponent = () => {
                                     )}
                                 </div>
                             </>
-                        ))
+                        
                     ) : (
                         <div className="home___error-container">
                             <h2 className="text-black text-xl font-bold">No products available</h2>

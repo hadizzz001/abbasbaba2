@@ -16,6 +16,7 @@ const CarCard = ({ temp }: CarCardProps) => {
 
 
     return (
+       
         <div className="br_grid br_grid-cols-1 supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid]" >
             <div className="Layout br_contents">
 
@@ -26,7 +27,7 @@ const CarCard = ({ temp }: CarCardProps) => {
                                 <div className="br_aspect-[4/5] sm:br_aspect-square">
                                     <div className="br_w-full br_h-full br_relative br_flex br_items-center br_justify-center">
                                         <img
-                                            className="br_w-full br_h-full br_object-center br_object-contain br_mx-auto br_max-h-64 sm:br_max-h-72 sm:br_px-4"
+                                            className="br_w-full br_h-full br_object-center br_object-contain br_mx-auto br_max-h-64 sm:br_max-h-72 sm:br_px-4  "
                                             alt="Slim Sleeve - Cocoa-Java"
                                             loading="lazy"
                                             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
