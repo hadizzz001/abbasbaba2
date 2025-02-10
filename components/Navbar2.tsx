@@ -185,7 +185,7 @@ function NavBar() {
 
 
 
-      <div className="pageHeaderContainer" id="mynavtoremove">
+      <div className="pageHeaderContainer">
         <div className="pageHeaderMenuOverlays">
           <div
             className="pageHeaderMenuOverlay pageHeaderMenuOverlays--search"
@@ -211,15 +211,14 @@ function NavBar() {
         </div>
         <div className="pageHeaderMenuPreHeader" id="PageMenuPreHeader">
           <a
-
-              data-roybell=""
+            href="/"
+            className="br_absolute br_left-1/2 br_top-1/2 br_-translate-y-1/2 br_-translate-x-1/2 xl:pointer-fine:br_absolute xl:pointer-fine:br_left-8 xl:pointer-fine:br_top-6 xl:pointer-fine:br_p-0 xl:pointer-fine:br_m-0 xl:pointer-fine:br_transform-none all-link-states:br_text-grey-600"
+            data-roybell=""
             data-location="homePageLogoLink"
             data-auto-id="true"
             id="page-header-homepage-1"
           >
-            
-              <img id="logotoedit" src="api/proxy?url=https://ucarecdn.com/2b05ccc7-4b80-4526-9c55-15ba05718f86/10393428.png" alt="" width={75} />
-            
+            <img src="api/proxy?url=https://ucarecdn.com/2b05ccc7-4b80-4526-9c55-15ba05718f86/10393428.png" alt="" width={100} />
           </a>
           <button id='hamburger' className="hamburger xl:pointer-fine:br_invisible" onClick={handleClick}>
             <span />
@@ -312,12 +311,12 @@ function NavBar() {
                 </a>
 
               </li>
-              <li className="br_group/item"
-                id="yourDivId"
+              <li className="br_group/item" 
+                id="yourDivId" 
               >
                 <a
                   className="br_flex br_items-center br_justify-between br_px-8 br_py-4  br_border-solid br_border-0 br_border-b  br_text-grey-600 br_text-lg-sans-bold-stretched br_no-underline xl:pointer-fine: xl:pointer-fine:br_text-base-sans-bold-stretched xl:pointer-fine:group-hover/item: xl:pointer-fine:focus:"
-                  href="/shop"
+href="/shop"
                 >
                   <div className="br_flex br_items-center br_gap-2">
                     Shop
@@ -326,7 +325,7 @@ function NavBar() {
 
 
 
-
+ 
 
 
 
@@ -351,13 +350,13 @@ function NavBar() {
                 >
                   <div className="br_flex br_items-center br_gap-2">Contact Us</div>
                 </a>
-              </li>
+              </li> 
             </ul>
           </nav>
         </div>
       </div>
 
-
+ 
 
     </>
   );

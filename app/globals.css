@@ -371,9 +371,11 @@ button:focus {
   display: block;  
 }
 
-#logotoedit{
-  margin-top: 2em;
+#logotoedit{ 
   width: 7%;
+  position: absolute;
+  top: 3em;
+  left: 2em;
 }
 
 @media (max-width: 768px) {
