@@ -378,7 +378,14 @@ button:focus {
   left: 2em;
 }
 
+#logotoedits{
+  margin-top:"2em";
+}
+
 @media (max-width: 768px) {
+  #logotoedits{
+    margin-top:initial;
+  }
   .wallet-image.desktop {
     display: none;
   }
@@ -409,5 +416,7 @@ button:focus {
 .SiteFooter__footNote{
   margin-bottom: 4em;
 }
+
+
 
 }
