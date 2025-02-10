@@ -9,7 +9,7 @@ const WhatsAppIcon = () => {
       rel="noopener noreferrer"
       style={{
         position: 'fixed',
-        bottom: '20px',
+        bottom: '70px',
         right: '20px',
         backgroundColor: '#fff',
         color: '#fff',

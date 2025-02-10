@@ -34,7 +34,7 @@ const Catslider = () => {
           {checkboxesData.length > 0 ? (
             checkboxesData.map((category) => (
               <a
-                href={`/search?cat=${category.name}`} 
+                href={`/search?cat=${category.name}`}
               >
                 <div
                   key={category.id}
@@ -43,18 +43,13 @@ const Catslider = () => {
                   <p className="text-left text-wrap m-auto align-middle self-center text-xs">
                     {category.name}
                   </p>
-                  <svg
-                    stroke="currentColor"
-                    fill="currentColor"
-                    strokeWidth={0}
-                    viewBox="0 0 256 256"
-                    className="shrink-0 w-9 h-9 align-middle self-center flex m-auto"
-                    height="1em"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M104,40H56A16,16,0,0,0,40,56v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,104,40Zm0,64H56V56h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm0,64H152V56h48v48Zm-96,32H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm0,64H56V152h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,200,136Zm0,64H152V152h48v48Z" />
-                  </svg>
+                  <div className="flex justify-center items-center ">
+                    <img
+                      src="api/proxy?url=https://ucarecdn.com/48b3456b-c5fe-4ef4-a177-c6a8a8ac1d2d/Hbbb9275db1bf486f817888c71159bfedbjpg_720x720q50.jpg"
+                      className="w-12 h-12 object-cover rounded-full"
+                    />
+                  </div>
+
                 </div>
               </a>
             ))

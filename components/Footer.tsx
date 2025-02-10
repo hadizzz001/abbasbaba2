@@ -153,7 +153,7 @@ const Footer = () => {
                             <li>
                                 <a
                                     target="_blank"
-                                    href="https://www.tiktok.com/@Abbas Baba.lb"
+                                    href="https://www.tiktok.com/@shoeslebanon?_t=ZS-8tjEjflHn31&_r=1"
                                     data-auto-id="true"
                                     id="page-footer-http-www-instagram-com-bellroy-1"
                                 >
@@ -176,7 +176,7 @@ const Footer = () => {
 
                                 </a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a
                                     target="_blank"
                                     href="https://www.instagram.com/Abbas Baba.lb/"
@@ -205,11 +205,11 @@ const Footer = () => {
                                         />
                                     </svg>
                                 </a>
-                            </li>
+                            </li> */}
                             <li>
                                 <a
                                     target="_blank"
-                                    href="https://www.facebook.com/Abbas Baba.lb"
+                                    href="https://www.facebook.com/share/18xSqQqfxr/"
                                     data-auto-id="true"
                                     id="page-footer-https-www-facebook-com-bellroy-official-1"
                                 >
@@ -386,7 +386,7 @@ const Footer = () => {
                             </a>
                         </div>
                         <div className="text">
-                            <div className="column">
+                            <div className="column mb-5"  >
                                 <p className="question">
                                     Got a question?{" "}
                                     <span>

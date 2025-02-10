@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 import { useState, useEffect } from "react";
 import { useSearchParams } from 'next/navigation'
 
@@ -7,8 +7,19 @@ import { useSearchParams } from 'next/navigation'
 const Body = () => {
     const [allTemp, setTemp] = useState()
     const searchParams = useSearchParams()
-    const search = searchParams.get('q') 
+    const search = searchParams.get('q')
     const search2 = searchParams.get('cat')
+    const [isCodeValid, setIsCodeValid] = useState(false);
+
+    useEffect(() => {
+      // Check localStorage for the code
+      const storedCode = localStorage.getItem("accessCode");
+      if (storedCode === "abcd12345") {
+        setIsCodeValid(true);
+      }
+    }, []);
+  
+   
 
 
 
@@ -112,7 +123,7 @@ const Body = () => {
                                                                         className="br_w-full br_h-full br_object-center br_object-contain br_mx-auto br_max-h-64 sm:br_max-h-72 sm:br_px-4"
                                                                         loading="lazy"
                                                                         sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
-                                                                        src={item.img[0]}
+                                                                        src={"api/proxy?url=" + item.img[0]}
                                                                     />
 
                                                                 </div>
@@ -137,9 +148,24 @@ const Body = () => {
                                                                 {item.type}
                                                             </div>
                                                             <br />
-                                                            <div className="br_text-base-sans-bold-spaced br_text-grey-600 br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
-                                                                ${item.price}
-                                                            </div>
+                                                          
+
+
+                                                            {!isCodeValid ? (
+                                                                <span></span>
+                                                            ) : (
+                                                                <div className="br_text-base-sans-bold-spaced br_text-grey-600 br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
+                                                                    ${item.price}
+                                                                </div>
+                                                            )}
+
+
+
+
+
+
+
+
                                                         </div>
 
                                                     </div>

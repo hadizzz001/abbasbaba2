@@ -1,9 +1,9 @@
 "use client"
 
 import { Test, CarCard } from '../../components'
-import { useState, useEffect, useRef } from 'react'; 
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation'; 
+import { useSearchParams } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { useBooleanValue } from '../context/CartBoolContext';
 import QuantitySelector from '../../components/QuantitySelector';
@@ -12,9 +12,11 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 const Page = () => {
+  const [code, setCode] = useState("");
+  const [isCodeValid, setIsCodeValid] = useState(false);
   const [translateXValue, setTranslateXValue] = useState(0);
   const [isActive1, setIsActive1] = useState(true);
-  const [isActive2, setIsActive2] = useState(true); 
+  const [isActive2, setIsActive2] = useState(true);
   const [quantity, setQuantity] = useState(1); // State for quantity
   let b;
   let b2;
@@ -28,7 +30,7 @@ const Page = () => {
   const [errors, setErrors] = useState({});
   const isInCart = cart?.some((item) => item.id === search);
   const specificItem = cart?.find((cartItem) => String(cartItem.id) === String(search));
-  const router = useRouter(); 
+  const router = useRouter();
   const [allTemp1, setAllTemps1] = useState(); // Stores products per category
   const [allTemp2, setAllTemps2] = useState(); // Stores products per category
 
@@ -57,9 +59,9 @@ const Page = () => {
     title = allTemp1.title;
     price = allTemp1.price;
     desc = allTemp1.description;
-  } 
-  
- 
+  }
+
+
   useEffect(() => {
     if (cat) { // Ensures `cat` is defined before running the effect
       const fetchData = async () => {
@@ -71,11 +73,11 @@ const Page = () => {
           console.error("Error fetching the description:", error);
         }
       };
-  
+
       fetchData();
     }
   }, [cat]); // Runs only when `cat` changes and is defined
-  
+
 
 
 
@@ -147,9 +149,29 @@ const Page = () => {
     router.push('/checkout');
   };
 
- 
+
 
   console.log(cart);
+
+
+
+
+  useEffect(() => {
+    // Check localStorage for the code
+    const storedCode = localStorage.getItem("accessCode");
+    if (storedCode === "abcd12345") {
+      setIsCodeValid(true);
+    }
+  }, []);
+
+  const handleCodeSubmit = () => {
+    if (code === "abcd12345") {
+      localStorage.setItem("accessCode", code);
+      setIsCodeValid(true);
+    } else {
+      alert("Invalid Code");
+    }
+  };
 
   return (
     <>
@@ -185,7 +207,7 @@ const Page = () => {
                                   <div>
                                     <div className="HtmlProductInfiniteGallery__Slides_Slide">
                                       <div className="Slide Slide--image">
-                                        <img src={item} style={{ maxWidth: "100%", height: "auto" }} />
+                                        <img src={"api/proxy?url="+item} style={{ maxWidth: "100%", height: "auto" }} />
                                       </div>
                                     </div>
                                   </div>
@@ -203,7 +225,7 @@ const Page = () => {
                         {imgs && imgs?.length > 0 ? (
                           imgs.map((item, idx) => (
                             <button onClick={() => handleClick(idx)} className="Thumbnail Thumbnail--image">
-                              <img src={item} />
+                              <img src={"api/proxy?url="+item} />
                             </button>
                           ))
                         ) : (
@@ -222,23 +244,51 @@ const Page = () => {
                       <span className="ProductSelector_EditionLabel" style={{ margin: "0 0 0 3px" }} />
                     </h1>
                     <p className='mb-2'>
-                      Category: {cat} 
+                      Category: {cat}
                     </p>
                     <p className='mb-2'>
-                      Subcategory: {sub} 
+                      Subcategory: {sub}
                     </p>
                     <p className='mb-2'>
-                      Brand: {brand} 
+                      Brand: {brand}
                     </p>
                   </span>
                   <div className="ApexPriceAndFreeShippingWrapper">
-                    <span className="ProvidersSingleProduct--selected">
-                      <div className="br_flex">
-                        <span className="price">
-                          <span className="price_value">${price}</span>
+
+
+
+
+
+
+
+
+                    <div>
+                      {!isCodeValid ? (
+                        <div>
+                        </div>
+                      ) : (
+                        <span className="ProvidersSingleProduct--selected">
+                          <div className="br_flex">
+                            <span className="price">
+                              <span className="price_value">${price}</span>
+                            </span>
+                          </div>
                         </span>
-                      </div>
-                    </span>
+                      )}
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div>
                       <div className="FreeShippingMessage FreeShippingMessage--empty" />
                     </div>
@@ -246,10 +296,10 @@ const Page = () => {
                   <hr />
                   <div className="ProductSelector_IntroBlurb">
                     <span className="ProvidersIfSelectedProductMatchesFilter">
-                    <p
-               
-              dangerouslySetInnerHTML={{ __html: desc }}
-            /><br />
+                      <p
+
+                        dangerouslySetInnerHTML={{ __html: desc }}
+                      /><br />
                     </span>
                   </div>
                   <div className="bagsFeaturesGrid__gridWrapper">
@@ -270,27 +320,61 @@ const Page = () => {
                         <br />
                       </>
                     ) : (
-                      <form onSubmit={handleSubmit}>
-                        <div className="">
-                          <QuantitySelector initialQty={quantity} onChange={setQuantity} />
-                          <div className=""></div>
-                          <div className="">
-                            <span className="ProvidersSingleProduct--selected">
-                              <button type="submit" className="AddToCart HtmlProductAddToCart" style={{ borderRadius: "0" }}>
-                                <span>ADD TO CART</span>
-                              </button>
-                            </span>
+                      <div>
+                        {!isCodeValid ? (
+                          <div>
+                            <a
+                              href="https://wa.me/+9613066976"
+                              target="_blank"
+                              className="whatsapp-btn"
+                              style={{
+                                display: "block",
+                                textAlign: "center",
+                                padding: "10px",
+                                backgroundColor: "#25D366",
+                                color: "white",
+                                borderRadius: "5px",
+                                textDecoration: "none",
+                                marginBottom: "10px",
+                              }}
+                            >
+                              GET PRICE NOW!
+                            </a>
+                            <input
+                              type="text"
+                              placeholder="Enter Code"
+                              value={code}
+                              onChange={(e) => setCode(e.target.value)}
+                              style={{ padding: "5px", marginRight: "5px" }}
+                            />
+                            <button onClick={handleCodeSubmit} style={{ padding: "5px 10px" }}>
+                              Submit
+                            </button>
                           </div>
-                          <div className=""></div>
-                        </div>
-                      </form>
+                        ) : (
+                          <form onSubmit={handleSubmit}>
+                            <div className="">
+                              <QuantitySelector initialQty={quantity} onChange={setQuantity} />
+                              <div className=""></div>
+                              <div className="">
+                                <span className="ProvidersSingleProduct--selected">
+                                  <button type="submit" className="AddToCart HtmlProductAddToCart" style={{ borderRadius: "0" }}>
+                                    <span>ADD TO CART</span>
+                                  </button>
+                                </span>
+                              </div>
+                              <div className=""></div>
+                            </div>
+                          </form>
+                        )}
+                      </div>
                     )}
                     <br />
                   </div>
                   <span className="ProvidersIfSelectedProductMatchesFilter">
                   </span>
                   <div className="DynamicAccordion" data-behaviour="tabs" id="dynamic_tabs_misc">
- 
+
                     <div id='shipID' className="DynamicAccordion_Tab DynamicAccordion_Tab--closed">
                       <label className="DynamicAccordion_Tab_Header">
                         <input onClick={handleClick2} className="DynamicAccordion_Tab_Header_ToggleCheckbox" type="checkbox" />

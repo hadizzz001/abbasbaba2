@@ -3,6 +3,7 @@ import { fetchTemp } from '../utils'
 import { useState, useEffect } from "react";
 import ProductList from './ProductList'; 
 import ProductList1 from './ProductList1'; 
+import ProductList2 from './ProductList2'; 
 import Contact from './Contact'; 
 import Design from './Design';
 import Review from './Review';
@@ -11,6 +12,8 @@ import Carousel from './Carousel';
 import BrandCarousel from './BrandCarousel';
 import Image from 'next/image';
 import Catslider from './Catslider';
+import TikTokEmbed from './TikTokEmbed';
+import FacebookEmbed from './FacebookEmbed';
 
 
 
@@ -146,10 +149,13 @@ const Body = () => {
         <div id="usp-scroll-to"></div>
 
         <Catslider />
+        <ProductList2 />
         <ProductList />
         <ProductList1 />
         <Design />
         <BrandCarousel />
+        <TikTokEmbed />
+        <FacebookEmbed />
 
         <style
           type="text/css"

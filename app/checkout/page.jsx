@@ -475,7 +475,7 @@ const page = () => {
                                                                   <span className="wfacp-pro-count">{localQuantities[obj.id]}</span>
                                                                 </div>
                                                               </div>
-                                                              <img src={obj.img[0]}
+                                                              <img src={"api/proxy?url="+obj.img[0]}
                                                                 width={100}
                                                                 height={100}
                                                               />{" "}

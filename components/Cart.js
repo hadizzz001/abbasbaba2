@@ -119,7 +119,7 @@ const Cart = () => {
                                         <div>
                                             <div className="Checkout_Cart_LineItems_LineItem">
                                                 <div className="Checkout_Cart_LineItems_LineItem_Thumb">
-                                                    <img src={obj.img[0]} />
+                                                    <img src={"api/proxy?url="+obj.img[0]} />
                                                 </div>
                                                 <div className="Checkout_Cart_LineItems_LineItem_Details">
                                                     {obj.title}
