@@ -403,15 +403,7 @@ button:focus {
   }
  
 
-.pageHeaderContainer{
-  height: 55px !important;
-  position: fixed !important;
-  bottom: 0 !important;
-  background: white !important;
-  z-index: 99999999999999999999 !important;
-  top: auto !important;
-}
-
+ 
 
 .SiteFooter__footNote{
   margin-bottom: 4em;
