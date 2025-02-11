@@ -26,10 +26,7 @@ export default function Home() {
           <h2 className="u-text u-text-1" style={{fontFamily: '"Manrope", sans-serif',fontWeight: "bolder",marginBottom: "1em",fontSize: "3em"}}>About Company</h2>
           <p className="u-text u-text-2" style={{fontFamily: 'Frank Ruhl Libre, "PT Serif", "Noto Serif", "Noto Serif JP", "Noto Serif KR", "Noto Serif SC", "Noto Serif TC", ui-serif, Georgia, Cambria, Times New Roman, Times, serif',fontSize: "1.2rem",lineHeight: "2rem",fontWeight:"400"}}>
             {" "}
-            Abbas Baba, founded by Hadi Medlej in 2024, is a local e-commerce shop headquartered in Beirut, Lebanon. Initially an online products, it has expanded to offer a vast array of products and items.
-<br/><br/>
-Abbas Baba offers a diverse range of products, catering to almost every conceivable need. These include electronics such as smartphones, tablets, and smart home devices. They also provide a wide selection of books, both physical and digital. Abbas Baba offers everyday items such as cables, batteries, and kitchen essentials. The company sells a vast array of apparel and accessories for all ages and styles.
-                                
+            Abbasbaba is your ultimate destination for stylish shoes and more, combining comfort, quality, and trendsetting designs. We bring you a curated collection that blends fashion with functionality, ensuring you step out in confidence every day. Whether you're looking for classic footwear or the latest styles, Abbasbaba has something for everyone.
           </p>
  
         </div>
