@@ -9,6 +9,7 @@ const Body = () => {
     const searchParams = useSearchParams()
     const search = searchParams.get('q')
     const search2 = searchParams.get('cat')
+    const search3 = searchParams.get('brnd')
     const [isCodeValid, setIsCodeValid] = useState(false);
 
     useEffect(() => {
@@ -41,6 +42,11 @@ const Body = () => {
                     const data = await response.json();
                     setTemp(data);
                 }
+                else if (search3) {
+                    const response = await fetch(`/api/products4/${search3}`);
+                    const data = await response.json();
+                    setTemp(data);
+                } 
             } catch (error) {
                 console.error("Error fetching categories:", error);
             }

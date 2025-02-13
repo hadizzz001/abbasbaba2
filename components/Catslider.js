@@ -45,7 +45,7 @@ const Catslider = () => {
                   </p>
                   <div className="flex justify-center items-center ">
                     <img
-                      src="api/proxy?url=https://ucarecdn.com/48b3456b-c5fe-4ef4-a177-c6a8a8ac1d2d/Hbbb9275db1bf486f817888c71159bfedbjpg_720x720q50.jpg"
+                      src={`api/proxy?url=${category.img[0]}`}
                       className="w-12 h-12 object-cover rounded-full"
                     />
                   </div>
