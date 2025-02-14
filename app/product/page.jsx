@@ -324,7 +324,7 @@ const Page = () => {
                         {!isCodeValid ? (
                           <div>
                             <a
-                              href="https://wa.me/+9613066976"
+                              href={`https://wa.me/+9613066976?text=${imgs[0]}`}
                               target="_blank"
                               className="whatsapp-btn"
                               style={{
