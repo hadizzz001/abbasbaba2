@@ -14,6 +14,7 @@ import Image from 'next/image';
 import Catslider from './Catslider';
 import TikTokEmbed from './TikTokEmbed';
 import FacebookEmbed from './FacebookEmbed';
+import InstagramPost from './InstagramPost';
 
 
 
@@ -149,13 +150,15 @@ const Body = () => {
         <div id="usp-scroll-to"></div>
 
         <Catslider />
+        <BrandCarousel />
         <ProductList2 />
         <ProductList />
         <ProductList1 />
         <Design />
-        <BrandCarousel />
+        
         <TikTokEmbed />
         <FacebookEmbed />
+        <InstagramPost />
 
         <style
           type="text/css"

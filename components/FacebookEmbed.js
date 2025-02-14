@@ -1,6 +1,37 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function FacebookEmbed() {
+  const [embedHtml, setEmbedHtml] = useState('');
+
+  useEffect(() => {
+    async function fetchFacebookEmbed() {
+      try {
+        const response = await fetch('/api/social/Facebook'); // Fetch API data
+        const data = await response.json();
+
+        if (data && data[0]?.link) {
+          // Directly use the provided embed link
+          setEmbedHtml(`
+            <iframe 
+              src="${data[0].link}" 
+              width="267" 
+              height="476" 
+              style="border:none;overflow:hidden" 
+              scrolling="no" 
+              frameborder="0" 
+              allowfullscreen="true" 
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+            </iframe>
+          `);
+        }
+      } catch (error) {
+        console.error('Error fetching Facebook embed:', error);
+      }
+    }
+
+    fetchFacebookEmbed();
+  }, []);
+
   useEffect(() => {
     // Load the Facebook SDK for JavaScript
     if (!document.getElementById('facebook-jssdk')) {
@@ -10,15 +41,11 @@ export default function FacebookEmbed() {
       script.async = true;
       document.body.appendChild(script);
     }
-  }, []);
+  }, [embedHtml]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: `<iframe src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100086788057177%2Fvideos%2F631106936128692%2F&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`,
-        }}
-      />
+      <div dangerouslySetInnerHTML={{ __html: embedHtml }} />
     </div>
   );
 }
