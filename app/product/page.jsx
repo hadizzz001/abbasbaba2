@@ -207,7 +207,7 @@ const Page = () => {
                                   <div>
                                     <div className="HtmlProductInfiniteGallery__Slides_Slide">
                                       <div className="Slide Slide--image">
-                                        <img src={"api/proxy?url="+item} style={{ maxWidth: "100%", height: "auto" }} />
+                                        <img src={"api/proxy?url=" + item} style={{ maxWidth: "100%", height: "auto" }} />
                                       </div>
                                     </div>
                                   </div>
@@ -225,7 +225,7 @@ const Page = () => {
                         {imgs && imgs?.length > 0 ? (
                           imgs.map((item, idx) => (
                             <button onClick={() => handleClick(idx)} className="Thumbnail Thumbnail--image">
-                              <img src={"api/proxy?url="+item} />
+                              <img src={"api/proxy?url=" + item} />
                             </button>
                           ))
                         ) : (
@@ -323,33 +323,42 @@ const Page = () => {
                       <div>
                         {!isCodeValid ? (
                           <div>
-                            <a
-                              href={`https://wa.me/+9613066976?text=${imgs[0]}`}
-                              target="_blank"
-                              className="whatsapp-btn"
-                              style={{
-                                display: "block",
-                                textAlign: "center",
-                                padding: "10px",
-                                backgroundColor: "#25D366",
-                                color: "white",
-                                borderRadius: "5px",
-                                textDecoration: "none",
-                                marginBottom: "10px",
-                              }}
-                            >
-                              GET PRICE NOW!
-                            </a>
-                            <input
-                              type="text"
-                              placeholder="Enter Code"
-                              value={code}
-                              onChange={(e) => setCode(e.target.value)}
-                              style={{ padding: "5px", marginRight: "5px" }}
-                            />
-                            <button onClick={handleCodeSubmit} style={{ padding: "5px 10px" }}>
-                              Submit
-                            </button>
+                            {imgs && imgs?.length > 0 ? (
+                              <>
+                                <a
+                                  href={`https://wa.me/+9613066976?text=${imgs[0]}`}
+                                  target="_blank"
+                                  className="whatsapp-btn"
+                                  style={{
+                                    display: "block",
+                                    textAlign: "center",
+                                    padding: "10px",
+                                    backgroundColor: "#25D366",
+                                    color: "white",
+                                    borderRadius: "5px",
+                                    textDecoration: "none",
+                                    marginBottom: "10px",
+                                  }}
+                                >
+                                  GET PRICE NOW!
+                                </a>
+                                <input
+                                  type="text"
+                                  placeholder="Enter Code"
+                                  value={code}
+                                  onChange={(e) => setCode(e.target.value)}
+                                  style={{ padding: "5px", marginRight: "5px" }}
+                                />
+                                <button onClick={handleCodeSubmit} style={{ padding: "5px 10px" }}>
+                                  Submit
+                                </button>
+                              </>
+                            ) : (
+                              <div className='container'>
+                                <h2 className='text-black text-xl dont-bold'>...</h2>
+                              </div>
+                            )}
+
                           </div>
                         ) : (
                           <form onSubmit={handleSubmit}>
