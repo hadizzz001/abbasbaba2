@@ -1,6 +1,8 @@
 import clientPromise from '../../lib/mongodb'; // Adjust path as needed
 import { NextResponse } from 'next/server';
 
+export const revalidate = 10;
+
 export async function POST(request) {
     try {
         const body = await request.json();

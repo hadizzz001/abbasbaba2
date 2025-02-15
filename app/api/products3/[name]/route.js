@@ -1,6 +1,8 @@
 import clientPromise from '../../../lib/mongodb';  
 import { NextResponse } from 'next/server';
 
+export const revalidate = 10;
+
 export async function GET(request, { params }) {
   const { name } = params;    
   

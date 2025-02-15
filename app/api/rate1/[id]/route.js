@@ -5,6 +5,8 @@ import clientPromise from '../../../lib/mongodb'; // Adjust path as needed
 import { NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb'; // Import ObjectId for converting id strings
 
+export const revalidate = 10;
+
 export async function GET(request, { params }) {
   const { id } = params;  
   console.log("id: ", id);

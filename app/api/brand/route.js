@@ -2,6 +2,8 @@
 import clientPromise from '../../lib/mongodb'; // Adjust path as needed
 import { NextResponse } from 'next/server';
 
+export const revalidate = 10;
+
 export async function GET() {
   try {
     const client = await clientPromise; // Connect to MongoDB
