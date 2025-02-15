@@ -13,7 +13,7 @@ const YourComponent = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await fetch(`/api/products1/Hot Sale`, { cache: 'no-store' });
+            const response = await fetch(`/api/products1/Hot Sale`);
             if (response.ok) {
                 const data = await response.json(); 
                 setAllTemps(data);
