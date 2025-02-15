@@ -31,8 +31,8 @@ const Page = () => {
   const isInCart = cart?.some((item) => item._id === search);
   const specificItem = cart?.find((cartItem) => String(cartItem._id) === String(search));
   const router = useRouter();
-  const [allTemp1, setAllTemps1] = useState(); 
-  const [allTemp2, setAllTemps2] = useState(); 
+  const [allTemp1, setAllTemps1] = useState();
+  const [allTemp2, setAllTemps2] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +40,7 @@ const Page = () => {
         const response = await fetch(`api/products/${search}`);
         const data = await response.json();
         console.log("data: ", data);
-        
+
         setAllTemps1(data[0]);
       } catch (error) {
         console.error("Error fetching the description:", error);
@@ -177,13 +177,20 @@ const Page = () => {
 
   return (
     <>
-    <head>
-    <meta property="og:title" content="Abbas baba" />
-<meta property="og:url" content="https://abbasbaba.com/" />
-<meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." />
-<meta property="og:image" content={imgs[0]} />
+      <head>
+        <meta property="og:title" content="Abbas baba" />
+        <meta property="og:url" content="https://abbasbaba.com/" />
+        <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." />
 
-    </head>
+
+        {imgs && imgs?.length > 0 ? (
+          <meta property="og:image" content={imgs[0]} />
+        ) : (
+          <></>
+        )}
+
+
+      </head>
       <style
         dangerouslySetInnerHTML={{
           __html: "\n\n.uploadcare--widget__button, .uploadcare--widget__button:hover {\n\tpadding: 10px;\n\tbackground-color: #d7d7d7; \n  color: #212529;\n  width:100%;\n}\n\n.uploadcare--widget__button:hover {\n\tbackground-color: #c1c1c1;\n  \n}\n\n\n"
