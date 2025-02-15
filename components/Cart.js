@@ -133,7 +133,7 @@ const Cart = () => {
                                                         
 
                                                     </div>
-                                                    {errors[obj._id] && <p style={{ color: 'red' }}>{errors[obj._id]}<a style={{ color: "#4acb4a", display: "inline" }} href={`/product?id=${obj._id}&&custom=1`}> add now</a></p>}
+                                                    {errors[obj._id] && <p style={{ color: 'red' }}>{errors[obj._id]}<a style={{ color: "#4acb4a", display: "inline" }} href={`/product?id=${obj._id}&&custom=1&&imgg=${obj.img[0]}`}> add now</a></p>}
                                                     <div
                                                         className="Checkout_Cart_LineItems_LineItem_Price"
                                                     >

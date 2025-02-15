@@ -23,6 +23,7 @@ const Page = () => {
   const searchParams = useSearchParams();
   const search = searchParams.get('id');
   const custom = searchParams.get('custom');
+  const imgg = searchParams.get('imgg');
   let imgs, title, price, desc, cat, brand, sub;
   const { cart, addToCart } = useCart();
   const { isBooleanValue, setBooleanValue } = useBooleanValue();
@@ -151,11 +152,7 @@ const Page = () => {
     router.push('/checkout');
   };
 
-
-
-  console.log(cart);
-
-
+ 
 
 
   useEffect(() => {
@@ -181,13 +178,8 @@ const Page = () => {
         <meta property="og:title" content="Abbas baba" />
         <meta property="og:url" content="https://abbasbaba.com/" />
         <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." />
-
-
-        {imgs && imgs?.length > 0 ? (
-          <meta property="og:image" content={imgs[0]} />
-        ) : (
-          <></>
-        )}
+        <meta property="og:image" content={imgg} />
+ 
 
 
       </head>
