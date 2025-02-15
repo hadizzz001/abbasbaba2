@@ -1,20 +1,18 @@
-import { PrismaClient } from '@prisma/client';
+import clientPromise from '../../lib/mongodb'; // Adjust path as needed
+import { NextResponse } from 'next/server';
 
-const prisma = new PrismaClient();
-
-export async function GET(req) {
+export async function GET() {
   try {
-    const categories = await prisma.category.findMany({
-      orderBy: {
-        id: 'asc',
-      },
-    });
-    
-    return new Response(JSON.stringify(categories), { status: 200 });
+    const client = await clientPromise; // Connect to MongoDB
+    const db = client.db('test'); // Replace with your database name
+    const collection = db.collection('Category'); // Replace with your collection name
+
+    // Use the sort method to order documents by 'id' in ascending order
+    const data = await collection.find().sort({ id: 1 }).toArray();
+
+    return NextResponse.json(data); // Return data as JSON
   } catch (error) {
-    console.error('Error fetching categories:', error);
-    return new Response(JSON.stringify({ error: 'Failed to fetch categories' }), { status: 500 });
+    console.error('Error fetching data from MongoDB:', error);
+    return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
   }
 }
-
- 

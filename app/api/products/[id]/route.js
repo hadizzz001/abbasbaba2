@@ -1,25 +1,23 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import clientPromise from '../../../lib/mongodb'; // Adjust path as needed
+import { NextResponse } from 'next/server';
+import { ObjectId } from 'mongodb'; // Import ObjectId for converting id strings
 
 export async function GET(request, { params }) {
   const { id } = params;  
- 
+  console.log("id: ", id);
+  
   try {
-   
-    const categories1 = await prisma.product.findUnique({
-      where: { id },
-    });
+    const client = await clientPromise; // Connect to MongoDB
+    const db = client.db('test'); // Replace with your database name
+    const collection = db.collection('Product'); // Replace with your collection name
 
-    if (!categories1 || categories1.length === 0) {
-      return new Response(JSON.stringify({ message: 'No ids found for the specified type.' }), {
-        status: 404,
-      });
-    }
+    // Convert id to ObjectId and query the document
+    const data = await collection.find({ _id: new ObjectId(id) }).toArray(); 
+    
 
-    return new Response(JSON.stringify(categories1), { status: 200 });
+    return NextResponse.json(data); // Return data as JSON
   } catch (error) {
-    console.error('Error fetching ids:', error);
-    return new Response(JSON.stringify({ error: 'Internal Server Error' }), { status: 500 });
+    console.error('Error fetching data from MongoDB:', error);
+    return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
   }
 }

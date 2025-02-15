@@ -1,47 +1,49 @@
   
-
-import { PrismaClient } from '@prisma/client';
-import { NextResponse } from "next/server"
-
-const prisma = new PrismaClient();
-
  
-export async function GET(req) {
-  try {
-    const products = await prisma.review.findMany({ });
+import clientPromise from '../../lib/mongodb'; // Adjust path as needed
+import { NextResponse } from 'next/server';
 
-    return new Response(JSON.stringify(products), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+export async function GET() {
+  try {
+    const client = await clientPromise; // Connect to MongoDB
+    const db = client.db('test'); // Replace with your database name
+    const collection = db.collection('Review'); // Replace with your collection name
+
+    const data = await collection.find({}).toArray(); // Fetch all documents
+
+    return NextResponse.json(data); // Return data as JSON
   } catch (error) {
-    console.error('Error fetching products:', error);
-    return new Response(JSON.stringify({ error: 'Failed to fetch products' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    console.error('Error fetching data from MongoDB:', error);
+    return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
   }
 }
 
 
 
 
-export const POST = async (request) => {
-    try {
-        const body = await request.json();
-        const {name, description,stars} = body;
 
-        const newOrder = await prisma.review.create({
-            data: {
-                name, description,stars
-            }
-        })
 
-        return NextResponse.json(newOrder);
 
-    } catch(err) {
-        return NextResponse.json({message: "POST Error", err}, {status: 500})
-    }
+
+
+export async function POST(request) {
+  try {
+      const body = await request.json();
+      const {name, description} = body;
+      const client = await clientPromise; // Connect to MongoDB
+      const db = client.db('test'); // Replace with your database name
+      const collection = db.collection('Review'); // Replace with your collection name
+
+      // Use the sort method to order documents by 'id' in ascending order
+      const data = await collection.create({
+          data: {
+            name, description
+          }
+      });
+
+      return NextResponse.json(data); // Return data as JSON
+  } catch (error) {
+      console.error('Error fetching data from MongoDB:', error);
+      return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
+  }
 }
-
- 

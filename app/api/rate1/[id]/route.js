@@ -1,29 +1,27 @@
- 
- 
+// where: {
+//   stars: {  contains: id }
+// }
+import clientPromise from '../../../lib/mongodb'; // Adjust path as needed
+import { NextResponse } from 'next/server';
+import { ObjectId } from 'mongodb'; // Import ObjectId for converting id strings
 
-import { PrismaClient } from '@prisma/client';
-import { NextResponse } from "next/server"
-
-const prisma = new PrismaClient();
-
-export async function GET(req) {
+export async function GET(request, { params }) {
+  const { id } = params;  
+  console.log("id: ", id);
+  
   try {
-    const products = await prisma.review.findMany({
-      where: {
-        stars: {  contains: id }
-      }
-     });
+    const client = await clientPromise; // Connect to MongoDB
+    const db = client.db('test'); // Replace with your database name
+    const collection = db.collection('Review'); // Replace with your collection name
 
-    return new Response(JSON.stringify(products), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    // Convert id to ObjectId and query the document
+    const data = await collection.find({ _id: new ObjectId(id) }).toArray(); 
+    
+
+    return NextResponse.json(data); // Return data as JSON
   } catch (error) {
-    console.error('Error fetching products:', error);
-    return new Response(JSON.stringify({ error: 'Failed to fetch products' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    console.error('Error fetching data from MongoDB:', error);
+    return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
   }
 }
 

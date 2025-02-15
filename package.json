@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "prisma generate"
+    "lint": "next lint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -15,13 +14,16 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@prisma/client": "^6.3.1",
     "axios": "^1.7.9",
+    "mongodb": "^6.13.0",
     "next": "15.1.6",
     "prisma": "^6.3.1",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
+    "react-rating": "^2.0.5",
     "react-rating-stars-component": "^2.2.0",
     "react-responsive-carousel": "^3.2.23",
+    "react-simple-star-rating": "^5.1.7",
     "react-social-media-embed": "^2.5.17",
     "resend": "^4.1.2",
     "swiper": "^11.2.2"

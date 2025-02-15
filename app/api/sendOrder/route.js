@@ -1,28 +1,24 @@
-import { PrismaClient } from '@prisma/client';
-import { NextResponse } from "next/server";
-const prisma = new PrismaClient();
+import clientPromise from '../../lib/mongodb'; // Adjust path as needed
+import { NextResponse } from 'next/server';
 
-
-
-export const POST = async (request) => {
+export async function POST(request) {
     try {
-        const data = await request.json();
-        const { inputs, items } = data;
+        const body = await request.json();
+        const { inputs, items } = body;
+        const client = await clientPromise; // Connect to MongoDB
+        const db = client.db('test'); // Replace with your database name
+        const collection = db.collection('Order'); // Replace with your collection name
 
-        console.log("items", items);
-        console.log("inputs", inputs);
+        // Insert the new order into the collection
+        const result = await collection.insertOne({
+            userInfo: items,
+            cartItems: inputs,
+            createdAt: new Date() // Optional: Add a timestamp
+        });
 
-
-        const newOrder = await prisma.order.create({
-            data: {
-                userInfo:items,
-                cartItems:inputs
-              }
-        })
-
-        return NextResponse.json(newOrder);
-
-    } catch (err) {
-        return NextResponse.json({ message: "POST Error", err }, { status: 500 })
+        return NextResponse.json({ success: true, insertedId: result.insertedId }); // Return success response
+    } catch (error) {
+        console.error('Error inserting data into MongoDB:', error);
+        return NextResponse.json({ error: 'Failed to insert data' }, { status: 500 });
     }
 }

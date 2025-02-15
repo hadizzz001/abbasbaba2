@@ -16,7 +16,7 @@ const Cart = () => {
 
     const handleQuantityChange = (itemId, quantity) => {
         addToCart(
-            cart.find((item) => item.id === itemId),
+            cart.find((item) => item._id === itemId),
             undefined, // No additionalInfo update here
             quantity
         );
@@ -126,28 +126,24 @@ const Cart = () => {
                                                     <div>
                                                         <span>Category:</span>
                                                         <span>{obj.category}</span>
-                                                    </div>
-                                                    <div>
-                                                        <span>Type:</span>
-                                                        <span>{obj.type}</span>
-                                                    </div>
+                                                    </div> 
                                                     <div className="Checkout_Cart_LineItems_LineItem_Details_Quantity">
                                                         <span>Qty:</span>
-                                                        <span>{localQuantities[obj.id] || 1}</span>
+                                                        <span>{localQuantities[obj._id] || 1}</span>
                                                         
 
                                                     </div>
-                                                    {errors[obj.id] && <p style={{ color: 'red' }}>{errors[obj.id]}<a style={{ color: "#4acb4a", display: "inline" }} href={`/product?id=${obj.id}&&custom=1`}> add now</a></p>}
+                                                    {errors[obj._id] && <p style={{ color: 'red' }}>{errors[obj._id]}<a style={{ color: "#4acb4a", display: "inline" }} href={`/product?id=${obj._id}&&custom=1`}> add now</a></p>}
                                                     <div
                                                         className="Checkout_Cart_LineItems_LineItem_Price"
                                                     >
                                                         <span className="Currency">
-                                                            <span className="Currency_Monetary">${(obj.price * localQuantities[obj.id] || obj.price)}</span>
+                                                            <span className="Currency_Monetary">${(obj.price * localQuantities[obj._id] || obj.price)}</span>
                                                             <span className="Currency_Code">USD</span>
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <button className="Checkout_Cart_LineItems_LineItem_Remove" onClick={() => handleRemoveFromCart(obj.id)}>
+                                                <button className="Checkout_Cart_LineItems_LineItem_Remove" onClick={() => handleRemoveFromCart(obj._id)}>
                                                     <span className="Checkout_Cart_LineItems_LineItem_Remove_Cross">
                                                         <span />
                                                         <span />

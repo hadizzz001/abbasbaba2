@@ -11,7 +11,7 @@ const cartReducer = (state, action) => {
     case 'UPDATE_CART':
       return action.payload; // Assuming action.payload is the updated cart array
     case 'REMOVE_FROM_CART':
-      return state.filter((item) => item.id !== action.payload);
+      return state.filter((item) => item._id !== action.payload);
     case 'CLEAR_CART':
       return []; // Return an empty array to clear the cart
     default:
@@ -54,25 +54,25 @@ const CartProvider = ({ children }) => {
   useEffect(() => {
     // Calculate subtotal whenever quantities change
     const newSubtotal = cart.reduce((acc, item) => {
-      const quantity = quantities[item.id] || 1;
+      const quantity = quantities[item._id] || 1;
       return acc + item.price * quantity;
     }, 0);
     setSubtotal(newSubtotal);
   }, [quantities, cart]);
 
   const addToCart = (item, quantity = {}) => {
-    const existingCartItemIndex = cart.findIndex((cartItem) => String(cartItem.id) === String(item.id));
+    const existingCartItemIndex = cart.findIndex((cartItem) => String(cartItem._id) === String(item._id));
 
     if (existingCartItemIndex !== -1) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
-        [item.id]: (prevQuantities[item.id] || 0) + quantity,
+        [item._id]: (prevQuantities[item._id] || 0) + quantity,
       }));
 
       dispatch({
         type: 'UPDATE_CART',
         payload: cart.map((cartItem) =>
-          String(cartItem.id) === String(item.id)
+          String(cartItem._id) === String(item._id)
             ? {
                 ...cartItem,
                 quantity: (cartItem.quantity || 0) + quantity, 
@@ -94,7 +94,7 @@ const CartProvider = ({ children }) => {
 
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
-        [item.id]: quantity,
+        [item._id]: quantity,
       }));
     }
   };

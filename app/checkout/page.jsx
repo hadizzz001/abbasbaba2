@@ -472,7 +472,7 @@ const page = () => {
                                                             <div className="wfacp-pro-thumb">
                                                               <div className="wfacp-qty-ball" style={{ top: "-5px" }}>
                                                                 <div className="wfacp-qty-count">
-                                                                  <span className="wfacp-pro-count">{localQuantities[obj.id]}</span>
+                                                                  <span className="wfacp-pro-count">{localQuantities[obj._id]}</span>
                                                                 </div>
                                                               </div>
                                                               <img src={"api/proxy?url="+obj.img[0]}
@@ -494,12 +494,12 @@ const page = () => {
                                                                 <span className="woocommerce-Price-currencySymbol">
                                                                   $
                                                                 </span>
-                                                                {(obj.price * localQuantities[obj.id] || obj.price).toFixed(2)}
+                                                                {(obj.price * localQuantities[obj._id] || obj.price).toFixed(2)}
                                                               </bdi>
                                                             </span>{" "}
                                                           </div>
 
-                                                          <button className="Checkout_Cart_LineItems_LineItem_Remove" onClick={() => handleRemoveFromCart(obj.id)} style={{ position: "relative" }}>
+                                                          <button className="Checkout_Cart_LineItems_LineItem_Remove" onClick={() => handleRemoveFromCart(obj._id)} style={{ position: "relative" }}>
                                                             <span className="Checkout_Cart_LineItems_LineItem_Remove_Cross">
                                                               <span />
                                                               <span />

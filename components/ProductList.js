@@ -69,7 +69,8 @@ const YourComponent = () => {
 
                 <div className="ProductTile-SliderContainer ProductTile-SliderContainer--YMAL px-3" data-product-list-category="ymal-slider">
                     <div className="ProductTile-SliderContainer-Title br_text-3xl-serif br_text-[#333]" style={{ textAlign: "left", fontSize: "1.3em", fontWeight: "bold", fontFamily: 'Manrope' }}>
-                        {category}
+                        
+                        <a href={`/search?cat=${category}`}>{category}</a>
                         <span style={{ position: "absolute", right: "1em" }}>
                             <svg
                                 fill="#000000"

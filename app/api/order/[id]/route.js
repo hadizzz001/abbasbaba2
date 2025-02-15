@@ -1,28 +1,23 @@
-import { NextResponse } from "next/server";
-import prisma from "../../../../libs/prismadb"
+import clientPromise from '../../../lib/mongodb'; // Adjust path as needed
+import { NextResponse } from 'next/server';
+import { ObjectId } from 'mongodb'; // Import ObjectId for converting id strings
 
-export const GET = async (request, { params }) => {
+export async function GET(request, { params }) {
+  const { id } = params;  
+  console.log("id: ", id);
+  
   try {
-    const { id } = params;
+    const client = await clientPromise; // Connect to MongoDB
+    const db = client.db('test'); // Replace with your database name
+    const collection = db.collection('Order'); // Replace with your collection name
 
-    const post = await prisma.order.findUnique({
-        where: {
-            id
-        }
-    });
+    // Convert id to ObjectId and query the document
+    const data = await collection.find({ _id: new ObjectId(id) }).toArray(); 
+    
 
-    if(!post) {
-        return NextResponse.json(
-            {message: "Post not found", err},
-            {status: 404}
-        )
-    }
-
-    return NextResponse.json(post);
-  } catch (err) {
-    return NextResponse.json({ message: "GET Error", err }, { status: 500 });
+    return NextResponse.json(data); // Return data as JSON
+  } catch (error) {
+    console.error('Error fetching data from MongoDB:', error);
+    return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
   }
-};
-
- 
- 
+}

@@ -1,5 +1,4 @@
-// "use client"; 
-import { fetchTemp } from '../utils'
+// "use client";  
 import { useState, useEffect } from "react";
 import ProductList from './ProductList'; 
 import ProductList1 from './ProductList1'; 

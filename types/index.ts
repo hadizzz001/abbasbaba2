@@ -9,7 +9,7 @@ export interface CustomButtonProps {
 
 
 export interface TempProps{ 
-    id: string;
+    _id: string;
     title:string;
     category:string;
     price:string;

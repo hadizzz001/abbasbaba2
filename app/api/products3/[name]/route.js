@@ -1,30 +1,21 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import clientPromise from '../../../lib/mongodb';  
+import { NextResponse } from 'next/server';
 
 export async function GET(request, { params }) {
-  const { name } = params;  
-
-  console.log("name= ",name);
+  const { name } = params;    
   
- 
   try {
-    // Fetch categories based on the "type" parameter
-    const categories = await prisma.product.findMany({
-      where: {
-        title: {  contains: name ,  mode: 'insensitive' }
-      }
-    });
+    const client = await clientPromise;  
+    const db = client.db('test'); 
+    const collection = db.collection('Product');  
 
-    if (!categories || categories.length === 0) {
-      return new Response(JSON.stringify({ message: 'No categories found for the specified type.' }), {
-        status: 404,
-      });
-    }
-
-    return new Response(JSON.stringify(categories), { status: 200 });
+    const data = await collection.find({ 
+      title: { $regex: name, $options: 'i' }
+    }).toArray();  
+ 
+    return NextResponse.json(data);  
   } catch (error) {
-    console.error('Error fetching categories:', error);
-    return new Response(JSON.stringify({ error: 'Internal Server Error' }), { status: 500 });
+    console.error('Error fetching data from MongoDB:', error);
+    return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
   }
 }

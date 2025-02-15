@@ -28,18 +28,20 @@ const Page = () => {
   const { isBooleanValue, setBooleanValue } = useBooleanValue();
   const targetRef = useRef(null);
   const [errors, setErrors] = useState({});
-  const isInCart = cart?.some((item) => item.id === search);
-  const specificItem = cart?.find((cartItem) => String(cartItem.id) === String(search));
+  const isInCart = cart?.some((item) => item._id === search);
+  const specificItem = cart?.find((cartItem) => String(cartItem._id) === String(search));
   const router = useRouter();
-  const [allTemp1, setAllTemps1] = useState(); // Stores products per category
-  const [allTemp2, setAllTemps2] = useState(); // Stores products per category
+  const [allTemp1, setAllTemps1] = useState(); 
+  const [allTemp2, setAllTemps2] = useState(); 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`api/products/${search}`);
         const data = await response.json();
-        setAllTemps1(data);
+        console.log("data: ", data);
+        
+        setAllTemps1(data[0]);
       } catch (error) {
         console.error("Error fetching the description:", error);
       }
@@ -424,7 +426,7 @@ const Page = () => {
                         }}>
                           <div className='home__cars-wrapper'>
                             {allTemp2.map((temp) => (
-                              <SwiperSlide key={temp.id}><CarCard temp={temp} /></SwiperSlide>
+                              <SwiperSlide key={temp._id}><CarCard temp={temp} /></SwiperSlide>
                             ))}
                           </div>
                         </Swiper>
