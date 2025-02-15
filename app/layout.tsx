@@ -10,6 +10,7 @@ import { CartProvider } from './context/CartContext';
 import { BooleanProvider } from './context/CartBoolContext'; 
 import GifLoader from '../components/GifLoader'
 import WhatsAppIcon from '../components/WhatsAppIcon';
+import Script from "next/script";
 
 
  
@@ -117,7 +118,15 @@ export default function RootLayout({
 <link href="https://fonts.cdnfonts.com/css/lato" rel="stylesheet"/> 
  
 
+<Script id="google-analytics" strategy="afterInteractive">
+    {`
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GKVJEXB18C');
+    `}
  
+  </Script>
 
   
 </>
