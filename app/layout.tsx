@@ -43,14 +43,14 @@ export default function RootLayout({
     content="At Abbas Baba, we're reshaping the way businesses connect."
     name="description" 
   />
-  <meta content="Abbas Baba" name="keywords" property="" />
+  <meta content="Abbas Baba" name="keywords" property="abbasbaba, shoes, men, women" />
   <meta
     content="Abbas Baba"
     name=""
     property="og:title"
   />
   <meta
-    content="https://bellroy.com/collection/slim-your-wallet"
+    content="https://abbasbaba.com/"
     name=""
     property="og:url"
   />
