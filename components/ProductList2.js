@@ -15,7 +15,7 @@ const YourComponent = () => {
 
     const fetchCategories = async () => {
         try {
-            const response = await fetch(`/api/products1/Hot Sale`);
+            const response = await fetch('/api/products1/Hot Sale', { cache: 'no-store' });
             if (response.ok) {
                 const data = await response.json();
                 setAllTemps(data);
