@@ -11,7 +11,9 @@ export async function GET(request, { params }) {
     const db = client.db('test'); // Replace with your database name
     const collection = db.collection('Product'); // Replace with your collection name
 
-    const data = await collection.find({ where: { brand },}).toArray(); // Fetch all documents
+    const data = await collection.find({  
+      brand 
+    }).toArray(); // Fetch all documents
  
     return NextResponse.json(data); // Return data as JSON
   } catch (error) {
