@@ -33,9 +33,17 @@ const Body = () => {
         const fetchCategories = async () => {
             try {
                 if (search2) {
-                    const response = await fetch(`/api/products1/${search2}`);
-                    const data = await response.json();
-                    setTemp(data);
+                    if(search2 =="yes"){
+                        const response = await fetch(`/api/products5`);
+                        const data = await response.json();
+                        setTemp(data);
+                    }
+                    else{
+                        const response = await fetch(`/api/products1/${search2}`);
+                        const data = await response.json();
+                        setTemp(data);
+                    }
+                    
                 }
                 else if (search) {
                     const response = await fetch(`/api/products3/${search}`);

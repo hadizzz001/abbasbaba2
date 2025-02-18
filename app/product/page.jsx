@@ -55,8 +55,7 @@ const Page = () => {
 
 
   if (allTemp1) {
-    imgs = allTemp1.img;
-    sub = allTemp1.subcategory;
+    imgs = allTemp1.img; 
     brand = allTemp1.brand;
     cat = allTemp1.category;
     title = allTemp1.title;
@@ -253,10 +252,7 @@ const Page = () => {
                     </h1>
                     <p className='mb-2'>
                       Category: {cat}
-                    </p>
-                    <p className='mb-2'>
-                      Subcategory: {sub}
-                    </p>
+                    </p> 
                     <p className='mb-2'>
                       Brand: {brand}
                     </p>

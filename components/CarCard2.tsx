@@ -50,7 +50,7 @@ const CarCard = ({ temp }: CarCardProps) => {
                             <div className="initial:br_row-span-1 br_col-start-1 br_row-start-2 br_px-3 group-[.centered]/tile:br_justify-center group-[.centered]/tile:br_text-center">
                                 <h3 style={{ color: "red", height: "100px" }} className="uppercase br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
                                     <a
-                                        href={`/product?id=${_id}&&imgg=${img[0]}`}
+                                        href={`/product?id=${_id}`}
                                         className="br_text-current br_no-underline"
                                     >
                                         🔥{title} 1 Box 📦<br />

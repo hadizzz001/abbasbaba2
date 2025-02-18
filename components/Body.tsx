@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import ProductList from './ProductList'; 
 import ProductList1 from './ProductList1'; 
+import ProductArrival from './ProductArrival'; 
 import ProductList2 from './ProductList2'; 
 import Contact from './Contact'; 
 import Design from './Design';
@@ -151,6 +152,7 @@ const Body = () => {
         <Catslider />
         <BrandCarousel />
         {/* <ProductList2 /> */}
+        <ProductArrival />
         <ProductList />
         <ProductList1 />
         <Design />
