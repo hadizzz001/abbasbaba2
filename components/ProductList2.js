@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import CarCard2 from './CarCard2'; // Ensure this component exists
+import CarCard from './CarCard'; // Ensure this component exists
 
-const YourComponent = () => { 
+const YourComponent = () => {
     const [hotSaleItems, setHotSaleItems] = useState([]);
     const [allTemps1, setAllTemps1] = useState();
 
@@ -17,7 +17,7 @@ const YourComponent = () => {
             const response = await fetch('/api/products', { cache: 'no-store' });
             if (response.ok) {
                 const data = await response.json();
-                const filteredData = data.filter(item => item.category === 'Hot Sale');
+                const filteredData = data.filter(item => item.category === 'New Arrivals');
                 setHotSaleItems(filteredData);
             } else {
                 console.error('Failed to fetch categories');
@@ -51,21 +51,22 @@ const YourComponent = () => {
                                 __html: ".ProductTile-SliderContainer--YMAL .ProductTile-SliderContainer-Title{height:auto;text-align:center; }"
                             }} />
                             <div className="ProductTile-SliderContainer px-3">
-                                <div className="ProductTile-SliderContainer-Title br_text-3xl-serif br_text-[#333]" 
+                                <div className="ProductTile-SliderContainer-Title br_text-3xl-serif br_text-[#333]"
                                     style={{ textAlign: "left", fontSize: "1.3em", fontWeight: "bold", fontFamily: 'Manrope' }}>
-                                                                        {allTemps1 ?(
+                                    {/* {allTemps1 ? (
                                         <>
-                                            <a style={{color:'red'}} href={`/search?cat=Hot Sale`}>{allTemps1.title}</a>
+                                            <a style={{ color: 'red' }} href={`/search?cat=Hot Sale`}>{allTemps1.title}</a>
                                         </>
 
 
 
                                     ) : (
                                         <p>No products Title</p>
-                                    )}
+                                    )} */}
+                                    <a   href={`/search?cat=New Arrivals`}>{allTemps1.title}</a>
                                     <span style={{ position: "absolute", right: "1em" }}>
                                         <svg fill="#000000" viewBox="0 0 24 24" width={42}>
-                                            <path d="M3,12H21m-3,3,3-3L18,9" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                            <path d="M3,12H21m-3,3,3-3L18,9" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </span>
                                 </div>
@@ -77,7 +78,7 @@ const YourComponent = () => {
                                         <div className="home__cars-wrapper">
                                             {hotSaleItems.map((temp) => (
                                                 <SwiperSlide key={temp.id}>
-                                                    <CarCard2 temp={temp} />
+                                                    <CarCard temp={temp} />
                                                 </SwiperSlide>
                                             ))}
                                         </div>

@@ -215,7 +215,7 @@ const Page = () => {
                                   <div>
                                     <div className="HtmlProductInfiniteGallery__Slides_Slide">
                                       <div className="Slide Slide--image">
-                                        <img src={"api/proxy?url=" + item} style={{ maxWidth: "100%", height: "auto" }} />
+                                        <img src={"" + item} style={{ maxWidth: "100%", height: "auto" }} />
                                       </div>
                                     </div>
                                   </div>
@@ -233,7 +233,7 @@ const Page = () => {
                         {imgs && imgs?.length > 0 ? (
                           imgs.map((item, idx) => (
                             <button onClick={() => handleClick(idx)} className="Thumbnail Thumbnail--image">
-                              <img src={"api/proxy?url=" + item} />
+                              <img src={"" + item} />
                             </button>
                           ))
                         ) : (

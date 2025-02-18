@@ -302,7 +302,7 @@ const Body = () => {
                                     className="br_w-full br_h-full br_object-center br_object-contain br_mx-auto br_max-h-64 sm:br_max-h-72 sm:br_px-4"
                                     loading="lazy"
                                     sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
-                                    src={"api/proxy?url="+item.img[0]}
+                                    src={""+item.img[0]}
                                   />
 
                                 </div>

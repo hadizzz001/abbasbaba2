@@ -4,16 +4,16 @@ import { useState, useEffect } from "react";
 import { fetchTemp1} from '../utils'
 
 export default function Test() {
-  const defaultBgImage = 'api/proxy?url=https://ucarecdn.com/89550036-3e93-49ec-af7e-ef9043cae270/ha.webp';
+  const defaultBgImage = 'https://ucarecdn.com/89550036-3e93-49ec-af7e-ef9043cae270/ha.webp';
   const hoverBgImage = 'https://res.cloudinary.com/duppvjinz/image/upload/v1712060162/fyfvqc5ewr2aqccfsflp.webp';
 
-  const defaultBgImage1 = 'api/proxy?url=https://ucarecdn.com/3ae384bd-5669-462c-8a2a-0654fcf03067/oa.webp';
+  const defaultBgImage1 = 'https://ucarecdn.com/3ae384bd-5669-462c-8a2a-0654fcf03067/oa.webp';
   const hoverBgImage1 = 'https://res.cloudinary.com/duppvjinz/image/upload/v1712059955/sa4bgzzhte0ycx5leejc.webp';
 
-  const defaultBgImage2 = 'api/proxy?url=https://ucarecdn.com/37cd4780-cfcc-4b01-a560-9e17ea673787/ofa.webp';
+  const defaultBgImage2 = 'https://ucarecdn.com/37cd4780-cfcc-4b01-a560-9e17ea673787/ofa.webp';
   const hoverBgImage2 = 'https://res.cloudinary.com/duppvjinz/image/upload/v1712059955/en6tiwnle1k7jed0jam8.webp';
 
-  const defaultBgImage3 = 'api/proxy?url=https://ucarecdn.com/aec52b90-b3cf-4840-92e8-c213c72f9e73/ma.webp';
+  const defaultBgImage3 = 'https://ucarecdn.com/aec52b90-b3cf-4840-92e8-c213c72f9e73/ma.webp';
   const hoverBgImage3 = 'https://res.cloudinary.com/duppvjinz/image/upload/v1712059955/yrt9da39oomvcjklvi6c.webp';
 
 

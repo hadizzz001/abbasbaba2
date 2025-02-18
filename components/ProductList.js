@@ -29,7 +29,18 @@ const YourComponent = () => {
           return acc;
         }, {});
 
-        setGroupedProducts(groups);
+        // Define the desired category order
+        const categoryOrder = ['New Arrivals', 'Men Shoes', 'Women Shoes', 'Kids Shoes'];
+
+        // Sort grouped products based on the predefined order
+        const sortedGroups = {};
+        categoryOrder.forEach((category) => {
+          if (groups[category]) {
+            sortedGroups[category] = groups[category];
+          }
+        });
+
+        setGroupedProducts(sortedGroups);
       } else {
         console.error('Failed to fetch products');
       }

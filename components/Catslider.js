@@ -45,7 +45,7 @@ const Catslider = () => {
                   </p>
                   <div className="flex justify-center items-center ">
                     <img
-                      src={`api/proxy?url=${category.img[0]}`}
+                      src={`${category.img[0]}`}
                       className="w-12 h-12 object-cover rounded-full"
                     />
                   </div>

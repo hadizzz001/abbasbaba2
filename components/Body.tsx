@@ -150,7 +150,7 @@ const Body = () => {
 
         <Catslider />
         <BrandCarousel />
-        <ProductList2 />
+        {/* <ProductList2 /> */}
         <ProductList />
         <ProductList1 />
         <Design />

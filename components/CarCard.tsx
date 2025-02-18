@@ -40,7 +40,7 @@ const CarCard = ({ temp }: CarCardProps) => {
                                             alt="Slim Sleeve - Cocoa-Java"
                                             loading="lazy"
                                             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
-                                            src={"api/proxy?url="+img[0]}
+                                            src={""+img[0]}
                                         />
                                     </div>
                                 </div>
