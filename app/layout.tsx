@@ -118,15 +118,20 @@ export default function RootLayout({
 <link href="https://fonts.cdnfonts.com/css/lato" rel="stylesheet"/> 
  
 
-<Script id="google-analytics" strategy="afterInteractive">
-    {`
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-GKVJEXB18C');
-    `}
+<Script
+        src={`https://www.googletagmanager.com/gtag/js?id=G-GKVJEXB18C`}
+        strategy="afterInteractive"
+      />
+
  
-  </Script>
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GKVJEXB18C');
+        `}
+      </Script>
 
   
 </>
