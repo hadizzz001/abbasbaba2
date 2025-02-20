@@ -11,7 +11,7 @@ import { BooleanProvider } from './context/CartBoolContext';
 import GifLoader from '../components/GifLoader'
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import Script from "next/script";
-
+import { GoogleAnalytics } from '@next/third-parties/google'
 
  
 
@@ -118,21 +118,7 @@ export default function RootLayout({
 <link href="https://fonts.cdnfonts.com/css/lato" rel="stylesheet"/> 
  
 
-<Script
-        src={`https://www.googletagmanager.com/gtag/js?id=G-GKVJEXB18C`}
-        strategy="afterInteractive"
-      />
-
  
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-GKVJEXB18C');
-        `}
-      </Script>
-
   
 </>
 
@@ -147,6 +133,7 @@ export default function RootLayout({
           <Navbar2 />
           <WhatsAppIcon />
           {children}
+          <GoogleAnalytics gaId="G-GKVJEXB18C" />
           <Footer />
         </CartProvider>
         </BooleanProvider>

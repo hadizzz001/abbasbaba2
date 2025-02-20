@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@next/third-parties": "^15.1.7",
     "@prisma/client": "^6.3.1",
     "axios": "^1.7.9",
     "mongodb": "^6.13.0",
