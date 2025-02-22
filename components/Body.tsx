@@ -23,6 +23,17 @@ const Body = () => {
     window.scrollTo(0, 0);
   }, [])
 
+
+  useEffect(() => {
+    const refreshInterval = 10 * 60 * 1000; // 10 minutes in milliseconds
+
+    const timer = setTimeout(() => {
+      window.location.reload(); // Hard refresh
+    }, refreshInterval);
+
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []);
+
   return (
 
     <div>

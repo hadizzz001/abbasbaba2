@@ -554,7 +554,7 @@ const page = () => {
                                                               <span className="woocommerce-Price-currencySymbol">
                                                                 $
                                                               </span>
-                                                              3.00
+                                                              5.00
                                                               
                                                             </bdi>
                                                           </span>
@@ -579,7 +579,7 @@ const page = () => {
                                                             <span className="woocommerce-Price-currencySymbol">
                                                               $
                                                             </span>
-                                                            {selectedOption !== 0 ? (subtotal + 3).toFixed(2) : subtotal.toFixed(2)}
+                                                            {selectedOption !== 0 ? (subtotal + 5).toFixed(2) : subtotal.toFixed(2)}
                                                           </bdi>
                                                         </span>
                                                       </strong>{" "}

@@ -207,25 +207,38 @@ const Page = () => {
                           <style type="text/css" dangerouslySetInnerHTML={{
                             __html: "#InfiniteGallery0 .HtmlProductInfiniteGallery { }#InfiniteGallery0 .HtmlProductInfiniteGallery__Wrapper { position:relative;overflow:hidden;width:100%;height:100%}#InfiniteGallery0 .HtmlProductInfiniteGallery__Slides { position:absolute;top:0;width:1200%;height:100%;display:grid;grid-template-columns:repeat(12, 1fr);transition:transform 300ms ease;cursor:grab}#InfiniteGallery0 .HtmlProductInfiniteGallery__Slides--dragging { transition:none}#InfiniteGallery0 .HtmlProductInfiniteGallery__Slides_Slide { max-width:100%;max-height:100%;overflow:hidden;position:relative;user-drag:none;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}"
                           }} />
-                          <div className="HtmlProductInfiniteGallery__Wrapper">
-                            <div className="HtmlProductInfiniteGallery__Slides " style={{ transform: `translateX(${translateXValue}%)` }}>
-                              {imgs && imgs?.length > 0 ? (
-                                imgs.map((item) => (
-                                  <div>
-                                    <div className="HtmlProductInfiniteGallery__Slides_Slide">
-                                      <div className="Slide Slide--image">
-                                        <img src={"" + item} style={{ maxWidth: "100%", height: "auto" }} />
-                                      </div>
-                                    </div>
-                                  </div>
-                                ))
-                              ) : (
-                                <div className='container'>
-                                  <h2 className='text-black text-xl dont-bold'>...</h2>
-                                </div>
-                              )}
-                            </div>
-                          </div>
+                       <div className="HtmlProductInfiniteGallery__Wrapper">
+  <div className="HtmlProductInfiniteGallery__Slides" style={{ transform: `translateX(${translateXValue}%)` }}>
+    {imgs && imgs?.length > 0 ? (
+      imgs.map((item) => (
+        <div key={item._id}> {/* Assuming each item has a unique _id */}
+          <div className="HtmlProductInfiniteGallery__Slides_Slide">
+            <div className="Slide Slide--image">
+              <div className="relative">
+                <img
+                  src={"" + item}
+                  style={{ maxWidth: "100%", height: "auto" }}
+                />
+
+                {/* Show "Sold" red circle if the category is "Hot Sale" */}
+                {cat === "Hot Sale" && (
+                  <div className="absolute top-0 right-0 mt-2 mr-2 flex items-center justify-center bg-red-500 text-white rounded-full w-16 h-16">
+                    <span className="text-xl font-bold">Sold</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    ) : (
+      <div className='container'>
+        <h2 className='text-black text-xl dont-bold'>...</h2>
+      </div>
+    )}
+  </div>
+</div>
+
                         </div>
                       </div>
                       <div className="HtmlProductGallery_Thumbnails">
@@ -274,7 +287,7 @@ const Page = () => {
                         <span className="ProvidersSingleProduct--selected">
                           <div className="br_flex">
                             <span className="price">
-                              <span className="price_value">${price}</span>
+                              <span className="price_value" style={{color:"red",fontWeight:'900',fontSize:'25px'}}>${price}</span>
                             </span>
                           </div>
                         </span>

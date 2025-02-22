@@ -1,31 +1,33 @@
 "use client";
  
 import Image from "next/image";
-import { TempProps } from "../types";
+import { TempProps2 } from "../types";
 import Link from "next/link";
 import { useState, useEffect, useRef } from 'react';
 
 interface CarCardProps {
-    temp: TempProps;
+    temp: TempProps2;
 }
 
 
 
 const CarCard = ({ temp }: CarCardProps) => {
-    const { _id, title, price, img } = temp;
+    const { _id, name,  img } = temp;
 
+ 
     const [isCodeValid, setIsCodeValid] = useState(false);
 
-    useEffect(() => {
-      // Check localStorage for the code
-      const storedCode = localStorage.getItem("accessCode");
-      if (storedCode === "abcd12345") {
-        setIsCodeValid(true);
-      }
-    }, []);
+      useEffect(() => {
+        // Check localStorage for the code
+        const storedCode = localStorage.getItem("accessCode");
+        if (storedCode === "abcd12345") {
+          setIsCodeValid(true);
+        }
+      }, []);
+
 
     return (
-       
+
         <div className="br_grid br_grid-cols-1 supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid]" >
             <div className="Layout br_contents">
 
@@ -46,22 +48,14 @@ const CarCard = ({ temp }: CarCardProps) => {
                                 </div>
                             </div>
                             <div className="initial:br_row-span-1 br_col-start-1 br_row-start-2 br_px-3 group-[.centered]/tile:br_justify-center group-[.centered]/tile:br_text-center">
-                                <h3 style={{ height:"100px"}} className="br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
+                                <h3  className="uppercase br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
                                     <a
-                                        href={`/product?id=${_id}`}
+                                        href={`/search?cat=${name}`}
                                         className="br_text-current br_no-underline"
-                                    >
-                                        {title}<br/>
-                                        {!isCodeValid ? (
-                                            <span></span>
-                                        ) : (
-                                            <span style={{color:"red",fontWeight:'900',fontSize:'25px'}}>${price}</span>
-                                        )}
-                                        <span
-                                            className="br_absolute br_inset-0 br_z-10"
-                                        />
+                                    > 
+ <p>{name}</p>
                                     </a>
-                                </h3> 
+                                </h3>
                             </div>
                         </div>
                     </span>

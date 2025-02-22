@@ -22,7 +22,7 @@ export interface TempProps1{
 }
 
 export interface TempProps2{ 
-    id: string;
+    _id: string;
     name:string;  
     img: string;
 }
