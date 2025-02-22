@@ -12,7 +12,7 @@ interface CarCardProps {
 
 
 const CarCard = ({ temp }: CarCardProps) => {
-    const { id, name, img } = temp;
+    const { _id, name, img } = temp;
 
 
     return (
