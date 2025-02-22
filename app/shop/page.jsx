@@ -338,7 +338,7 @@ const Body = () => {
                                     {!isCodeValid ? (
                                         <span></span>
                                     ) : (
-                                        <div style={{color:"red",fontWeight:'900',fontSize:'25px'}} className="br_text-base-sans-bold-spaced br_text-grey-600 br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
+                                        <div  className="br_text-base-sans-bold-spaced br_text-grey-600 br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
                                             ${item.price}
                                         </div>
                                     )}

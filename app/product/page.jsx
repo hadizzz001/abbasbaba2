@@ -287,7 +287,7 @@ const Page = () => {
                         <span className="ProvidersSingleProduct--selected">
                           <div className="br_flex">
                             <span className="price">
-                              <span className="price_value" style={{color:"red",fontWeight:'900',fontSize:'25px'}}>${price}</span>
+                              <span className="price_value" >${price}</span>
                             </span>
                           </div>
                         </span>

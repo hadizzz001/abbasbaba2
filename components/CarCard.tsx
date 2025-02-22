@@ -55,7 +55,7 @@ const CarCard = ({ temp }: CarCardProps) => {
                                         {!isCodeValid ? (
                                             <span></span>
                                         ) : (
-                                            <span style={{color:"red",fontWeight:'900',fontSize:'25px'}}>${price}</span>
+                                            <span >${price}</span>
                                         )}
                                         <span
                                             className="br_absolute br_inset-0 br_z-10"
