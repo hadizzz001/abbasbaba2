@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { TempProps } from "../types";
 import Link from "next/link";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react'; 
 
 interface CarCardProps {
     temp: TempProps;
@@ -24,6 +24,9 @@ const CarCard = ({ temp }: CarCardProps) => {
       }
     }, []);
 
+    const modifiedUrl = img[0].replace('/upload/', '/upload/w_500/q_auto/f_auto/');
+    
+
     return (
        
         <div className="br_grid br_grid-cols-1 supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid]" >
@@ -40,7 +43,7 @@ const CarCard = ({ temp }: CarCardProps) => {
                                             alt="Slim Sleeve - Cocoa-Java"
                                             loading="lazy"
                                             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
-                                            src={""+img[0]}
+                                            src={""+modifiedUrl}
                                         />
                                     </div>
                                 </div>

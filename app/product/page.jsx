@@ -55,7 +55,7 @@ const Page = () => {
 
 
   if (allTemp1) {
-    imgs = allTemp1.img; 
+    imgs = allTemp1.img;
     brand = allTemp1.brand;
     cat = allTemp1.category;
     title = allTemp1.title;
@@ -151,7 +151,7 @@ const Page = () => {
     router.push('/checkout');
   };
 
- 
+
 
 
   useEffect(() => {
@@ -178,7 +178,7 @@ const Page = () => {
         <meta property="og:url" content="https://abbasbaba.com/" />
         <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." />
         <meta property="og:image" content={imgg} />
- 
+
 
 
       </head>
@@ -207,37 +207,38 @@ const Page = () => {
                           <style type="text/css" dangerouslySetInnerHTML={{
                             __html: "#InfiniteGallery0 .HtmlProductInfiniteGallery { }#InfiniteGallery0 .HtmlProductInfiniteGallery__Wrapper { position:relative;overflow:hidden;width:100%;height:100%}#InfiniteGallery0 .HtmlProductInfiniteGallery__Slides { position:absolute;top:0;width:1200%;height:100%;display:grid;grid-template-columns:repeat(12, 1fr);transition:transform 300ms ease;cursor:grab}#InfiniteGallery0 .HtmlProductInfiniteGallery__Slides--dragging { transition:none}#InfiniteGallery0 .HtmlProductInfiniteGallery__Slides_Slide { max-width:100%;max-height:100%;overflow:hidden;position:relative;user-drag:none;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}"
                           }} />
-                       <div className="HtmlProductInfiniteGallery__Wrapper">
-  <div className="HtmlProductInfiniteGallery__Slides" style={{ transform: `translateX(${translateXValue}%)` }}>
-    {imgs && imgs?.length > 0 ? (
-      imgs.map((item) => (
-        <div key={item._id}> {/* Assuming each item has a unique _id */}
-          <div className="HtmlProductInfiniteGallery__Slides_Slide">
-            <div className="Slide Slide--image">
-              <div className="relative">
-                <img
-                  src={"" + item}
-                  style={{ maxWidth: "100%", height: "auto" }}
-                />
+                          <div className="HtmlProductInfiniteGallery__Wrapper">
+                            <div className="HtmlProductInfiniteGallery__Slides" style={{ transform: `translateX(${translateXValue}%)` }}>
+                              {imgs && imgs?.length > 0 ? (
+                                imgs.map((item) => (
+                                  <div key={item._id}> {/* Assuming each item has a unique _id */}
+                                    <div className="HtmlProductInfiniteGallery__Slides_Slide">
+                                      <div className="Slide Slide--image">
+                                        <div className="relative">
+                                          <img
+                                            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
+                                            src={item?.replace('/upload/', '/upload/w_500/q_auto/f_auto/')}
+                                          />
 
-                {/* Show "Sold" red circle if the category is "Hot Sale" */}
-                {cat === "Hot Sale" && (
-                  <div className="absolute top-0 right-0 mt-2 mr-2 flex items-center justify-center bg-red-500 text-white rounded-full w-16 h-16">
-                    <span className="text-xl font-bold">Sold</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      ))
-    ) : (
-      <div className='container'>
-        <h2 className='text-black text-xl dont-bold'>...</h2>
-      </div>
-    )}
-  </div>
-</div>
+
+                                          {/* Show "Sold" red circle if the category is "Hot Sale" */}
+                                          {cat === "Hot Sale" && (
+                                            <div className="absolute top-0 right-0 mt-2 mr-2 flex items-center justify-center bg-red-500 text-white rounded-full w-16 h-16">
+                                              <span className="text-xl font-bold">Sold</span>
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))
+                              ) : (
+                                <div className='container'>
+                                  <h2 className='text-black text-xl dont-bold'>...</h2>
+                                </div>
+                              )}
+                            </div>
+                          </div>
 
                         </div>
                       </div>
@@ -245,7 +246,10 @@ const Page = () => {
                         {imgs && imgs?.length > 0 ? (
                           imgs.map((item, idx) => (
                             <button onClick={() => handleClick(idx)} className="Thumbnail Thumbnail--image">
-                              <img src={"" + item} />
+                                                                        <img
+                                            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
+                                            src={item?.replace('/upload/', '/upload/w_500/q_auto/f_auto/')}
+                                          />
                             </button>
                           ))
                         ) : (
@@ -265,7 +269,7 @@ const Page = () => {
                     </h1>
                     <p className='mb-2'>
                       Category: {cat}
-                    </p> 
+                    </p>
                     <p className='mb-2'>
                       Brand: {brand}
                     </p>
