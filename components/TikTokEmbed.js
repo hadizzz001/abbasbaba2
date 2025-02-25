@@ -6,18 +6,23 @@ export default function TikTokEmbed() {
   useEffect(() => {
     async function fetchTikTokEmbed() {
       try {
-        const response = await fetch('/api/social/Tiktok'); // Fetch API data
+        const response = await fetch('/api/social'); // Fetch API data
         const data = await response.json();
 
-        if (data[0] && data[0].link) {
+        // Filter for items with lastName === 'TikTok'
+        const filteredData = data.filter(item => item.name === 'Tiktok');
+
+    
+
+        if (filteredData[0] && filteredData[0].link) {
           // Extract videoId (last part of the URL)
-          const videoId = data[0].link.split('/').pop();
+          const videoId = filteredData[0].link.split('/').pop();
 
           // Set the embed HTML
           setEmbedHtml(`
-            <blockquote class="tiktok-embed" cite="${data[0].link}" data-video-id="${videoId}" style="max-width: 605px; min-width: 325px;">
+            <blockquote class="tiktok-embed" cite="${filteredData[0].link}" data-video-id="${videoId}" style="max-width: 605px; min-width: 325px;">
               <section>
-                <a target="_blank" title="@username" href="${data[0].link}">@shoeslebanon</a>
+                <a target="_blank" title="@username" href="${filteredData[0].link}">@shoeslebanon</a>
                 <p>Follow Us</p>
                 <a target="_blank" title="♬ original sound" href="https://www.tiktok.com/music/original-sound-id">♬ original sound</a>
               </section>

@@ -6,14 +6,16 @@ export default function FacebookEmbed() {
   useEffect(() => {
     async function fetchFacebookEmbed() {
       try {
-        const response = await fetch('/api/social/Facebook'); // Fetch API data
+        const response = await fetch('/api/social'); // Fetch API data
         const data = await response.json();
 
-        if (data && data[0]?.link) {
-          // Directly use the provided embed link
+        // Filter for the item with name === "Facebook"
+        const facebookData = data.find(item => item.name === 'Facebook');
+
+        if (facebookData?.link) {
           setEmbedHtml(`
             <iframe 
-              src="${data[0].link}" 
+              src="${facebookData.link}" 
               width="267" 
               height="476" 
               style="border:none;overflow:hidden" 

@@ -8,24 +8,21 @@ const InstagramPost = () => {
   useEffect(() => {
     const fetchInstagramPost = async () => {
       try {
-        // Fetch data from the API using the native fetch function
-        const response = await fetch("/api/social/Insta");
+        const response = await fetch("/api/social");
 
-        // Check if the response is successful (status 200)
         if (!response.ok) {
           throw new Error("Failed to fetch Instagram data");
         }
 
-        // Parse the JSON response
         const data = await response.json();
 
-        // Assuming the response contains the link in data[0].link
-        const link = data[0]?.link;
+        // Filter the data where name === "Insta"
+        const instaPost = data.find((item) => item.name === "Insta");
 
-        if (link) {
-          setPostLink(link);
+        if (instaPost?.link) {
+          setPostLink(instaPost.link);
         } else {
-          console.error("No link found in the response");
+          console.error("No Instagram post found with name 'Insta'");
         }
       } catch (error) {
         console.error("Error fetching Instagram data:", error);
@@ -39,7 +36,7 @@ const InstagramPost = () => {
     <div className="flex justify-center">
       {postLink ? (
         <iframe
-          src={`https://www.instagram.com/p/${postLink.split('/')[4]}/embed`}
+          src={`https://www.instagram.com/p/${postLink.split("/")[4]}/embed`}
           width="328"
           height="600"
           frameBorder="0"
@@ -48,7 +45,7 @@ const InstagramPost = () => {
           title="Instagram Post"
         ></iframe>
       ) : (
-        <p> </p>
+        <p>No Instagram post available.</p>
       )}
     </div>
   );
