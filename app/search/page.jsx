@@ -13,14 +13,14 @@ const Body = () => {
     const [isCodeValid, setIsCodeValid] = useState(false);
 
     useEffect(() => {
-      // Check localStorage for the code
-      const storedCode = localStorage.getItem("accessCode");
-      if (storedCode === "abcd12345") {
-        setIsCodeValid(true);
-      }
+        // Check localStorage for the code
+        const storedCode = localStorage.getItem("accessCode");
+        if (storedCode === "abcd12345") {
+            setIsCodeValid(true);
+        }
     }, []);
-  
-   
+
+
 
 
 
@@ -33,17 +33,17 @@ const Body = () => {
         const fetchCategories = async () => {
             try {
                 if (search2) {
-                    if(search2 =="yes"){
+                    if (search2 == "yes") {
                         const response = await fetch(`/api/products5`);
                         const data = await response.json();
                         setTemp(data);
                     }
-                    else{
+                    else {
                         const response = await fetch(`/api/products1/${search2}`);
                         const data = await response.json();
                         setTemp(data);
                     }
-                    
+
                 }
                 else if (search) {
                     const response = await fetch(`/api/products3/${search}`);
@@ -54,7 +54,7 @@ const Body = () => {
                     const response = await fetch(`/api/products4/${search3}`);
                     const data = await response.json();
                     setTemp(data);
-                } 
+                }
             } catch (error) {
                 console.error("Error fetching categories:", error);
             }
@@ -125,66 +125,74 @@ const Body = () => {
                                     allTemp.map((item) => (
 
                                         <div
-                                        className="br_grid br_grid-cols-1 supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid]"
-                                    >
-                                        <div className="Layout br_contents">
-                                            <span className="br_contents br_edition-">
-                                                <div className="br_grid br_grid-cols-1 br_grid-rows-[auto_auto_1fr_auto] supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid]  initial:br_text-grey-600 apex:br_bg-[#4e4e4e] apex:br_text-white br_gap-2 br_pb-3 br_group/tile br_relative">
-                                                    <div className="initial:br_row-span-1 br_col-start-1 br_row-start-1 br_relative">
-                                                        <div className="br_aspect-[4/5] sm:br_aspect-square">
-                                                            <div className="br_w-full br_h-full br_relative br_flex br_items-center br_justify-center">
-                                                            <img
-  className="br_w-full br_h-full br_object-center br_object-contain br_mx-auto br_max-h-64 sm:br_max-h-72 sm:br_px-4"
-  loading="lazy"
-  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
-  src={item.img[0]?.replace('/upload/', '/upload/w_500/q_auto/f_auto/')}
-  alt={item.title}
-/>
+                                            className="br_grid br_grid-cols-1 supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid]"
+                                        >
+                                            <div className="Layout br_contents">
+                                                <span className="br_contents br_edition-">
+                                                    <div className="br_grid br_grid-cols-1 br_grid-rows-[auto_auto_1fr_auto] supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid]  initial:br_text-grey-600 apex:br_bg-[#4e4e4e] apex:br_text-white br_gap-2 br_pb-3 br_group/tile br_relative">
+                                                        <div className="initial:br_row-span-1 br_col-start-1 br_row-start-1 br_relative">
+                                                            <div className="br_aspect-[4/5] sm:br_aspect-square">
+                                                                <div className="br_w-full br_h-full br_relative br_flex br_items-center br_justify-center">
 
+
+                                                                    <div className="relative br_w-full br_h-full br_flex br_justify-center br_items-center">
+                                                                        {item.category === "Hot Sale" && (
+                                                                            <img
+                                                                                src="https://res.cloudinary.com/drupytlml/image/upload/v1740521061/m5fzgzf1a4p6xn3bj1mn.png"
+                                                                                alt="Hot Sale Badge"
+                                                                                className="absolute   left-5 w-30 h-40 sm:w-40 sm:h-40"
+                                                                                style={{ top: "-15px" }}
+                                                                            />
+                                                                        )}
+                                                                        <img
+                                                                            className="br_w-full br_h-full br_object-center br_object-contain br_mx-auto br_max-h-64 sm:br_max-h-72 sm:br_px-4"
+                                                                            loading="lazy"
+                                                                            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
+                                                                            src={item.img[0]?.replace('/upload/', '/upload/w_500/q_auto/f_auto/')}
+                                                                            alt={item.title}
+                                                                        />
+                                                                    </div>
+
+
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                    
-                                                    {/* Show "Sold" red circle if the category is "Hot Sale" */}
-                                                    {item.category === "Hot Sale" && (
-                                                        <div className="absolute top-0 right-0 mt-2 mr-2 flex items-center justify-center bg-red-500 text-white rounded-full w-16 h-16">
-                                                            <span className="text-xl font-bold">Sold</span>
-                                                        </div>
-                                                    )}
-                                    
-                                                    <div style={{ textAlign: "center" }} className="initial:br_row-span-1 br_col-start-1 br_row-start-2 br_px-3 group-[.centered]/tile:br_justify-center group-[.centered]/tile:br_text-center">
-                                                        <h3 className="br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
-                                                            <a
-                                                                href={`/product?id=${item._id}&&imgg=${item.img[0]}`}
-                                                                className="br_text-current br_no-underline"
-                                                                id='anchorNew'
-                                                            >
-                                                                {item.title}
-                                                                <span className="br_absolute br_inset-0 br_z-10" aria-hidden="true" />
-                                                            </a>
-                                                        </h3>
-                                                        <div className="br_text-base-sans-bold-spaced br_text-grey-600 br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
-                                                            {item.category}
-                                                        </div>
-                                                        <br />
-                                                        <div className="br_text-base-sans-bold-spaced br_text-grey-600 br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
-                                                            {item.type}
-                                                        </div>
-                                                        <br />
-                                    
-                                                        {!isCodeValid ? (
-                                                            <span></span>
-                                                        ) : (
-                                                            <div  className="br_text-base-sans-bold-spaced br_text-grey-600 br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
-                                                                ${item.price}
+
+
+
+                                                        <div style={{ textAlign: "center" }} className="initial:br_row-span-1 br_col-start-1 br_row-start-2 br_px-3 group-[.centered]/tile:br_justify-center group-[.centered]/tile:br_text-center">
+                                                            <h3 className="br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
+                                                                <a
+                                                                    href={`/product?id=${item._id}&&imgg=${item.img[0]}`}
+                                                                    className="br_text-current br_no-underline"
+                                                                    id='anchorNew'
+                                                                >
+                                                                    {item.title}
+                                                                    <span className="br_absolute br_inset-0 br_z-10" aria-hidden="true" />
+                                                                </a>
+                                                            </h3>
+                                                            <div className="br_text-base-sans-bold-spaced br_text-grey-600 br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
+                                                                {item.category}
                                                             </div>
-                                                        )}
+                                                            <br />
+                                                            <div className="br_text-base-sans-bold-spaced br_text-grey-600 br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
+                                                                {item.type}
+                                                            </div>
+                                                            <br />
+
+                                                            {!isCodeValid ? (
+                                                                <span></span>
+                                                            ) : (
+                                                                <div className="br_text-base-sans-bold-spaced br_text-grey-600 br_inline-flex br_flex-wrap br_gap-x-2 br_items-baseline apex:br_text-white group-[.centered]/tile:br_justify-center">
+                                                                    ${item.price}
+                                                                </div>
+                                                            )}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </span>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    
+
 
                                     ))
                                 ) : (

@@ -215,18 +215,24 @@ const Page = () => {
                                     <div className="HtmlProductInfiniteGallery__Slides_Slide">
                                       <div className="Slide Slide--image">
                                         <div className="relative">
-                                          <img
-                                            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
-                                            src={item?.replace('/upload/', '/upload/w_500/q_auto/f_auto/')}
-                                          />
 
 
-                                          {/* Show "Sold" red circle if the category is "Hot Sale" */}
-                                          {cat === "Hot Sale" && (
-                                            <div className="absolute top-0 right-0 mt-2 mr-2 flex items-center justify-center bg-red-500 text-white rounded-full w-16 h-16">
-                                              <span className="text-xl font-bold">Sold</span>
-                                            </div>
-                                          )}
+                                          <div className="relative br_w-full br_h-full br_flex br_justify-center br_items-center">
+                                            {cat === "Hot Sale" && (
+                                              <img
+                                                src="https://res.cloudinary.com/drupytlml/image/upload/v1740521061/m5fzgzf1a4p6xn3bj1mn.png"
+                                                alt="Hot Sale Badge"
+                                                className="absolute    w-40 h-40 sm:w-40 sm:h-40"
+                                                style={{ top: "-1em", left: "8em" }}
+                                              />
+                                            )}
+                                            <img
+                                              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
+                                              src={item?.replace('/upload/', '/upload/w_500/q_auto/f_auto/')}
+                                            />
+                                          </div>
+
+
                                         </div>
                                       </div>
                                     </div>
@@ -246,10 +252,10 @@ const Page = () => {
                         {imgs && imgs?.length > 0 ? (
                           imgs.map((item, idx) => (
                             <button onClick={() => handleClick(idx)} className="Thumbnail Thumbnail--image">
-                                                                        <img
-                                            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
-                                            src={item?.replace('/upload/', '/upload/w_500/q_auto/f_auto/')}
-                                          />
+                              <img
+                                sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
+                                src={item?.replace('/upload/', '/upload/w_500/q_auto/f_auto/')}
+                              />
                             </button>
                           ))
                         ) : (

@@ -1,9 +1,9 @@
 "use client";
- 
+
 import Image from "next/image";
 import { TempProps } from "../types";
 import Link from "next/link";
-import { useState, useEffect, useRef } from 'react'; 
+import { useState, useEffect, useRef } from 'react';
 
 interface CarCardProps {
     temp: TempProps;
@@ -12,23 +12,23 @@ interface CarCardProps {
 
 
 const CarCard = ({ temp }: CarCardProps) => {
-    const { _id, title, price, img } = temp;
+    const { _id, title, price, img, category } = temp;
 
     const [isCodeValid, setIsCodeValid] = useState(false);
 
     useEffect(() => {
-      // Check localStorage for the code
-      const storedCode = localStorage.getItem("accessCode");
-      if (storedCode === "abcd12345") {
-        setIsCodeValid(true);
-      }
+        // Check localStorage for the code
+        const storedCode = localStorage.getItem("accessCode");
+        if (storedCode === "abcd12345") {
+            setIsCodeValid(true);
+        }
     }, []);
 
     const modifiedUrl = img[0].replace('/upload/', '/upload/w_500/q_auto/f_auto/');
-    
+
 
     return (
-       
+
         <div className="br_grid br_grid-cols-1 supports-subgrid:br_row-span-4 supports-subgrid:br_grid-rows-[subgrid]" >
             <div className="Layout br_contents">
 
@@ -38,23 +38,34 @@ const CarCard = ({ temp }: CarCardProps) => {
                             <div className="initial:br_row-span-1 br_col-start-1 br_row-start-1 br_relative">
                                 <div className="br_aspect-[4/5] sm:br_aspect-square">
                                     <div className="br_w-full br_h-full br_relative br_flex br_items-center br_justify-center">
-                                        <img
-                                            className="br_w-full br_h-full br_object-center br_object-contain br_mx-auto br_max-h-64 sm:br_max-h-72 sm:br_px-4  "
-                                            alt="Slim Sleeve - Cocoa-Java"
-                                            loading="lazy"
-                                            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
-                                            src={""+modifiedUrl}
-                                        />
+                                        <div className="relative br_w-full br_h-full br_flex br_justify-center br_items-center">
+                                            {category === "Hot Sale" && (
+                                                <img
+                                                    src="https://res.cloudinary.com/drupytlml/image/upload/v1740521061/m5fzgzf1a4p6xn3bj1mn.png"
+                                                    alt="Hot Sale Badge"
+                                                    className="absolute   left-0 w-44 h-44 sm:w-44 sm:h-44"
+                                                    style={{ top: "-20px" }}
+                                                />
+                                            )}
+                                            <img
+                                                className="br_w-full br_h-full br_object-center br_object-contain br_mx-auto br_max-h-64 sm:br_max-h-72 sm:br_px-4"
+                                                alt="Slim Sleeve - Cocoa-Java"
+                                                loading="lazy"
+                                                sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
+                                                src={"" + modifiedUrl}
+                                            />
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                             <div className="initial:br_row-span-1 br_col-start-1 br_row-start-2 br_px-3 group-[.centered]/tile:br_justify-center group-[.centered]/tile:br_text-center">
-                                <h3 style={{ height:"100px"}} className="br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
+                                <h3 style={{ height: "100px" }} className="br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
                                     <a
                                         href={`/product?id=${_id}`}
                                         className="br_text-current br_no-underline"
                                     >
-                                        {title}<br/>
+                                        {title}<br />
                                         {!isCodeValid ? (
                                             <span></span>
                                         ) : (
@@ -64,7 +75,7 @@ const CarCard = ({ temp }: CarCardProps) => {
                                             className="br_absolute br_inset-0 br_z-10"
                                         />
                                     </a>
-                                </h3> 
+                                </h3>
                             </div>
                         </div>
                     </span>
