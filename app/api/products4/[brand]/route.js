@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
     const collection = db.collection('Product'); // Replace with your collection name
 
     const data = await collection.find({  
-      brand 
+      brand :brand
     }).toArray(); // Fetch all documents
  
     return NextResponse.json(data); // Return data as JSON

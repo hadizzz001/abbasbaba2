@@ -13,7 +13,7 @@ export async function GET(request, { params }) {
     const collection = db.collection('Product'); // Replace with your collection name
 
     // Directly query by category
-    const data = await collection.find({ category }).toArray();
+    const data = await collection.find({ category:category }).toArray();
 
     return NextResponse.json(data); // Return data as JSON
   } catch (error) {
