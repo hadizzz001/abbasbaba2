@@ -45,22 +45,7 @@ export default function RootLayout({
   />
   <meta content="Abbas Baba" name="keywords" property="abbasbaba, shoes, men, women" />
 
-   
-  <link
-    href="/favicon.ico"
-    rel="apple-touch-icon"
-    sizes="180x180"
-  />
-  <link
-    href="/favicon.ico"
-    rel="icon"
-    sizes="32x32" 
-  />
-  <link
-    href="/favicon.ico"
-    rel="icon"
-    sizes="16x16" 
-  /> 
+ 
  
   <meta content="#ffffff" name="msapplication-TileColor" />
   <meta content="#ffffff" name="theme-color" />

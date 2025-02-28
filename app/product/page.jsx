@@ -10,6 +10,8 @@ import QuantitySelector from '../../components/QuantitySelector';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import { Helmet } from "react-helmet-async";
+import Head from 'next/head'
 
 const Page = () => {
   const [code, setCode] = useState("");
@@ -173,17 +175,17 @@ const Page = () => {
 
   return (
     <>
-      <head>
+      <Head>
         <meta property="og:title" content="Abbas baba" />
         <meta property="og:url" content="https://abbasbaba.com/" />
-        <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." /> 
-          <meta property="og:image" content={imgg} />
- 
+        <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." />
+        <meta property="og:image" content={imgg} />
 
 
 
 
-      </head>
+
+        </Head>
       <style
         dangerouslySetInnerHTML={{
           __html: "\n\n.uploadcare--widget__button, .uploadcare--widget__button:hover {\n\tpadding: 10px;\n\tbackground-color: #d7d7d7; \n  color: #212529;\n  width:100%;\n}\n\n.uploadcare--widget__button:hover {\n\tbackground-color: #c1c1c1;\n  \n}\n\n\n"
