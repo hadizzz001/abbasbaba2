@@ -4,22 +4,61 @@ const QuantitySelector = ({ initialQty = 1, onChange }) => {
   const [qty, setQty] = useState(initialQty);
 
   const handleIncrement = () => {
-    setQty(qty + 1);
-    onChange(qty + 1);
+    setQty((prev) => {
+      const newQty = prev + 1;
+      onChange(newQty);
+      return newQty;
+    });
   };
 
   const handleDecrement = () => {
-    if (qty > 1) {
-      setQty(qty - 1);
-      onChange(qty - 1);
+    setQty((prev) => {
+      if (prev > 1) {
+        const newQty = prev - 1;
+        onChange(newQty);
+        return newQty;
+      }
+      return prev;
+    });
+  };
+
+  const handleChange = (e) => {
+    let value = e.target.value;
+
+    if (value === "") {
+      setQty("");
+      return;
+    }
+
+    value = parseInt(value, 10);
+    if (!isNaN(value) && value > 0) {
+      setQty(value);
+      onChange(value);
     }
   };
 
   return (
     <div className="quantity-selector">
-      <button type="button" onClick={handleDecrement} style={{width: "20px",backgroundColor: "#fff",marginRight: "5px",fontWeight:" 900"}}>-</button>
-      <input type="number" value={qty} readOnly style={{ width:"30px"}} />
-      <button type="button" onClick={handleIncrement} style={{width: "20px",backgroundColor: "#fff",marginLeft: "5px",fontWeight:" 900"}}>+</button>
+      <button
+        type="button"
+        onClick={handleDecrement}
+        style={{ width: "20px", backgroundColor: "#fff", marginRight: "5px", fontWeight: "900" }}
+      >
+        -
+      </button>
+      <input
+        type="number"
+        value={qty}
+        onChange={handleChange}
+        style={{ width: "40px", textAlign: "center" }}
+      />
+      <button
+        type="button"
+        onClick={handleIncrement}
+        style={{ width: "20px", backgroundColor: "#fff", marginLeft: "5px", fontWeight: "900" }}
+      >
+        +
+      </button>
     </div>
   );
 };

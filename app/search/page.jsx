@@ -32,36 +32,27 @@ const Body = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                if (search2) {
-                    if (search2 == "yes") {
-                        const response = await fetch(`/api/products5`);
-                        const data = await response.json();
-                        setTemp(data);
-                    }
-                    else {
-                        const response = await fetch(`/api/products1/${search2}`);
-                        const data = await response.json();
-                        setTemp(data);
-                    }
-
-                }
-                else if (search) {
-                    const response = await fetch(`/api/products3/${search}`);
-                    const data = await response.json();
+                const response = await fetch(`/api/products`);
+                const data = await response.json();
+    
+                if (search) {
+                    setTemp(data.filter(item => item.title.toLowerCase().includes(search.toLowerCase())));
+                } else if (search2) {
+                    setTemp(data.filter(item => item.category.toLowerCase() === search2.toLowerCase()));
+                } else if (search3) {
+                    setTemp(data.filter(item => item.brand.toLowerCase() === search3.toLowerCase()));
+                } else {
                     setTemp(data);
                 }
-                else if (search3) {
-                    const response = await fetch(`/api/products4/${search3}`);
-                    const data = await response.json();
-                    setTemp(data);
-                }
+    
             } catch (error) {
                 console.error("Error fetching categories:", error);
             }
         };
-
+    
         fetchCategories();
-    }, []);
+    }, [search, search2, search3]);
+    
     
 
 
