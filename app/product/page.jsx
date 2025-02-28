@@ -177,7 +177,14 @@ const Page = () => {
         <meta property="og:title" content="Abbas baba" />
         <meta property="og:url" content="https://abbasbaba.com/" />
         <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." />
-        <meta property="og:image" content={imgs[0]} />
+
+        {imgs && imgs?.length > 0 ? (
+          <meta property="og:image" content={imgs[0]} />
+
+        ) : (
+          <></>
+        )}
+
 
 
 
