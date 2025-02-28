@@ -9,8 +9,7 @@ import { useBooleanValue } from '../context/CartBoolContext';
 import QuantitySelector from '../../components/QuantitySelector';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import { Helmet } from "react-helmet-async";
+import 'swiper/css'; 
 import Head from 'next/head'
 
 const Page = () => {
