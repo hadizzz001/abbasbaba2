@@ -173,7 +173,7 @@ const Page = () => {
   };
 
   const handleClickr = () => { 
-    sessionStorage.setItem("imgg", imgValue);
+    sessionStorage.setItem("imgg", imgg);
     router.push(`/prod.html`);
   };
  
