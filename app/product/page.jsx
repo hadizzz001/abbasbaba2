@@ -173,7 +173,7 @@ const Page = () => {
   };
 
   const handleClickr = () => { 
-    router.push(`/index.html?imgg=${encodeURIComponent(imgg)}`);
+    router.push(`/prod.html?imgg=${encodeURIComponent(imgg)}`);
   };
  
   
