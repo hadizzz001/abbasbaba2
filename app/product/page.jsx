@@ -173,7 +173,8 @@ const Page = () => {
   };
 
   const handleClickr = () => { 
-    router.push(`/prod.html?imgg=${encodeURIComponent(imgg)}`);
+    sessionStorage.setItem("imgg", imgValue);
+    router.push(`/prod.html`);
   };
  
   
