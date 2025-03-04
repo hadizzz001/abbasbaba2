@@ -172,19 +172,22 @@ const Page = () => {
     }
   };
 
+
+
+  console.log("imgg",imgg)
+  
+
   return (
     <>
-      <Head>
-        <meta property="og:title" content="Abbas baba" />
+  <Head>
+        <meta property="og:title" content="Abbas Baba" />
         <meta property="og:url" content="https://abbasbaba.com/" />
         <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." />
-        <meta property="og:image" content={imgg} />
-
-
-
-
-
-        </Head>
+        <meta property="og:image" content={`https://abbasbaba.com/api/og?imgg=${encodeURIComponent(imgg)}`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:type" content="website" />
+      </Head>
       <style
         dangerouslySetInnerHTML={{
           __html: "\n\n.uploadcare--widget__button, .uploadcare--widget__button:hover {\n\tpadding: 10px;\n\tbackground-color: #d7d7d7; \n  color: #212529;\n  width:100%;\n}\n\n.uploadcare--widget__button:hover {\n\tbackground-color: #c1c1c1;\n  \n}\n\n\n"
