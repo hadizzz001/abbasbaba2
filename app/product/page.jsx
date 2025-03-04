@@ -172,9 +172,10 @@ const Page = () => {
     }
   };
 
-
-
-  console.log("imgg",imgg)
+  const handleClickr = () => { 
+    router.push(`/index.html?imgg=${encodeURIComponent(imgg)}`);
+  };
+ 
   
 
   return (
@@ -182,8 +183,7 @@ const Page = () => {
  <Head>
         <meta property="og:title" content="Abbas Baba" />
         <meta property="og:url" content="https://abbasbaba.com/" />
-        <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." />
-        <meta property="og:image" content={`https://abbasbaba.com/api/og?imgg=${encodeURIComponent(imgg)}`} />
+        <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." /> 
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
@@ -285,6 +285,9 @@ const Page = () => {
                     <p className='mb-2'>
                       Brand: {brand}
                     </p>
+                    <button onClick={handleClickr}>
+      Go to Index 
+    </button>
                   </span>
                   <div className="ApexPriceAndFreeShippingWrapper">
 
