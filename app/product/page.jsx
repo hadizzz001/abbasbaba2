@@ -39,18 +39,25 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`api/products/${search}`);
+        // Fetch all products
+        const response = await fetch('api/products');
         const data = await response.json();
-        console.log("data: ", data);
-
-        setAllTemps1(data[0]);
+        console.log("all data: ", data);
+  
+        // Filter the data based on the search criteria (assuming 'search' is the id)
+        const filteredProduct = data.filter(item => item._id === search);
+        console.log("all filteredProduct: ", filteredProduct);
+        
+        // Set the filtered product (or an empty array if no match)
+        setAllTemps1(filteredProduct.length > 0 ? filteredProduct[0] : null);
       } catch (error) {
-        console.error("Error fetching the description:", error);
+        console.error("Error fetching the products:", error);
       }
     };
-
+  
     fetchData();
-  }, []);
+  }, []); // Add 'search' as a dependency to re-fetch when it changes
+  
 
 
 
@@ -286,9 +293,7 @@ const Page = () => {
                     <p className='mb-2'>
                       Brand: {brand}
                     </p>
-                    <button onClick={handleClickr}>
-      Go to Index 
-    </button>
+ 
                   </span>
                   <div className="ApexPriceAndFreeShippingWrapper">
 
