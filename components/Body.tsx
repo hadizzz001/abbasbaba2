@@ -25,7 +25,7 @@ const Body = () => {
 
 
   useEffect(() => {
-    const refreshInterval = 2 * 60 * 1000; // 10 minutes in milliseconds
+    const refreshInterval = 1 * 60 * 1000; // 10 minutes in milliseconds
 
     const timer = setTimeout(() => {
       window.location.reload(); // Hard refresh
