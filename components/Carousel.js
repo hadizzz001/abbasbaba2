@@ -32,18 +32,20 @@ const MyComponent = () => {
   console.log("bannerUrl:", bannerUrl);
 
   return (
-    <div className="syw-container flex justify-center items-center  mt-5">
-      <div className="image-container">
+    <div className=" mt-1">
+      <div className=" ">
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         {bannerUrl ? (
           <img
-            src={bannerUrl}
-            alt="Banner"
-            width={1200}
-            height={800}
-            
-          />
+  src={bannerUrl}
+  alt="Banner"
+  id="bannerid"
+  style={{ width: "100%", height: "25vh", objectFit: "cover" }}
+/>
+
+
+
         ) : (
           !loading && !error && <p>No banner available</p>
         )}
