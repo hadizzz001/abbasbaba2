@@ -25,7 +25,7 @@ const Page = () => {
   const search = searchParams.get('id');
   const custom = searchParams.get('custom');
   const imgg = searchParams.get('imgg');
-  let imgs, title, price, desc, cat, brand, sub;
+  let imgs, title, price, desc, cat, brand, sub, box, colors, sizes;
   const { cart, addToCart } = useCart();
   const { isBooleanValue, setBooleanValue } = useBooleanValue();
   const targetRef = useRef(null);
@@ -34,7 +34,10 @@ const Page = () => {
   const specificItem = cart?.find((cartItem) => String(cartItem._id) === String(search));
   const router = useRouter();
   const [allTemp1, setAllTemps1] = useState();
-  const [allTemp2, setAllTemps2] = useState();
+  const [allTemp2, setAllTemps2] = useState(); 
+
+  const [selectedColor, setSelectedColor] = useState('');
+  const [selectedSize, setSelectedSize] = useState(''); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,10 +68,13 @@ const Page = () => {
   if (allTemp1) {
     imgs = allTemp1.img;
     brand = allTemp1.brand;
+    box = allTemp1.box;
     cat = allTemp1.category;
     title = allTemp1.title;
     price = allTemp1.price;
     desc = allTemp1.description;
+    colors = allTemp1.color;
+    sizes = allTemp1.size;
   }
 
 
@@ -90,17 +96,7 @@ const Page = () => {
 
 
 
-
-
-
-  const fetchPrice = async () => {
-    const response = await fetchTemp4(search);
-    setTemp1(response);
-  };
-
-  useEffect(() => {
-    fetchPrice();
-  }, []);
+ 
 
   const sv = -8.3333333;
 
@@ -149,10 +145,28 @@ const Page = () => {
     }
   };
 
+
+
+  const handleColorChange = (color) => {
+    setSelectedColor(color);
+  };
+
+  const handleSizeChange = (size) => {
+    setSelectedSize(size);
+  };
+
+  const handleQuantityChange = (e) => {
+    setQuantity(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    addToCart(allTemp1, quantity);
-    handleClickc();
+    const data = {
+      color: selectedColor,
+      size: selectedSize,  
+    };
+    addToCart(allTemp1, quantity, data); // Pass the third parameter, allTemp1
+    handleClickc(); // Custom function for further actions, if needed
   };
 
   const gotocart = () => {
@@ -292,7 +306,7 @@ const Page = () => {
                     </p>
                     <p className='mb-2'>
                       Brand: {brand}
-                    </p>
+                    </p> 
  
                   </span>
                   <div className="ApexPriceAndFreeShippingWrapper">
@@ -405,8 +419,59 @@ const Page = () => {
                         ) : (
                           <form onSubmit={handleSubmit}>
                             <div className="">
-                              <QuantitySelector initialQty={quantity} onChange={setQuantity} />
+                              <QuantitySelector initialQty={quantity} onChange={setQuantity} maxBoxes={box} />
                               <div className=""></div>
+
+
+
+
+                              <div>
+        <label className="block mb-2 font-semibold">Select Color:</label>
+        <div className="flex gap-2">
+          {colors?.map((color) => (
+            <div
+              key={color}
+              onClick={() => setSelectedColor(color)}
+              className={`w-10 h-10 rounded-full border-2 cursor-pointer transition-all duration-150 ${
+                selectedColor === color ? 'ring-2 ring-offset-2 ring-blue-500' : ''
+              }`}
+              style={{ backgroundColor: color }}
+            ></div>
+          ))}
+        </div>
+      </div>
+
+      {/* Size Selection */}
+      <div>
+        <label className="block mb-2 font-semibold">Select Size:</label>
+        <div className="flex gap-2">
+          {sizes?.map((size) => (
+            <button
+              key={size}
+              type="button"
+              onClick={() => setSelectedSize(size)}
+              className={`border px-4 py-2 rounded transition-all duration-150 ${
+                selectedSize === size
+                  ? 'bg-blue-600 text-white border-blue-600'
+                  : 'bg-white text-black'
+              }`}
+            >
+              {size}
+            </button>
+          ))}
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
                               <div className="">
                                 <span className="ProvidersSingleProduct--selected">
                                   <button type="submit" className="AddToCart HtmlProductAddToCart" style={{ borderRadius: "0" }}>

@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
 
@@ -7,13 +7,13 @@ const CartContext = createContext();
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      return action.payload; // Assuming action.payload is the updated cart array
+      return action.payload;
     case 'UPDATE_CART':
-      return action.payload; // Assuming action.payload is the updated cart array
+      return action.payload;
     case 'REMOVE_FROM_CART':
       return state.filter((item) => item._id !== action.payload);
     case 'CLEAR_CART':
-      return []; // Return an empty array to clear the cart
+      return [];
     default:
       return state;
   }
@@ -21,7 +21,7 @@ const cartReducer = (state, action) => {
 
 const CartProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(cartReducer, [], (initial) => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       try {
         const storedCart = localStorage.getItem('cart');
         return storedCart ? JSON.parse(storedCart) : initial;
@@ -29,44 +29,51 @@ const CartProvider = ({ children }) => {
         console.error('Error parsing cart from localStorage:', error);
         return initial;
       }
-    } 
+    }
   });
-  
+
   const [quantities, setQuantities] = useState(() => {
-    if (typeof window !== "undefined"){
-    const storedQuantities = localStorage.getItem('quantities');
-    return storedQuantities ? JSON.parse(storedQuantities) : {};
-  }
+    if (typeof window !== 'undefined') {
+      const storedQuantities = localStorage.getItem('quantities');
+      return storedQuantities ? JSON.parse(storedQuantities) : {};
+    }
   });
 
   const [subtotal, setSubtotal] = useState(0);
 
   useEffect(() => {
-    if (typeof window !== "undefined")
-    localStorage.setItem('cart', JSON.stringify(cart));
+    if (typeof window !== 'undefined')
+      localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
   useEffect(() => {
-    if (typeof window !== "undefined")
-    localStorage.setItem('quantities', JSON.stringify(quantities));
+    if (typeof window !== 'undefined')
+      localStorage.setItem('quantities', JSON.stringify(quantities));
   }, [quantities]);
 
   useEffect(() => {
-    // Calculate subtotal whenever quantities change
     const newSubtotal = cart.reduce((acc, item) => {
-      const quantity = quantities[item._id] || 1;
-      return acc + item.price * quantity;
+      const itemData = quantities[item._id];
+      const q = itemData?.quantity || 1;
+      return acc + item.price * q;
     }, 0);
     setSubtotal(newSubtotal);
   }, [quantities, cart]);
 
-  const addToCart = (item, quantity = {}) => {
-    const existingCartItemIndex = cart.findIndex((cartItem) => String(cartItem._id) === String(item._id));
+  const addToCart = (item, quantity = {}, data) => {
+    const existingCartItemIndex = cart.findIndex(
+      (cartItem) => String(cartItem._id) === String(item._id)
+    );
+
+    const newItemData = {
+      quantity: (quantities[item._id]?.quantity || 0) + quantity,
+      ...data, // includes size and color
+    };
 
     if (existingCartItemIndex !== -1) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
-        [item._id]: (prevQuantities[item._id] || 0) + quantity,
+        [item._id]: newItemData,
       }));
 
       dispatch({
@@ -75,7 +82,8 @@ const CartProvider = ({ children }) => {
           String(cartItem._id) === String(item._id)
             ? {
                 ...cartItem,
-                quantity: (cartItem.quantity || 0) + quantity, 
+                quantity: (cartItem.quantity || 0) + quantity,
+                ...data,
               }
             : cartItem
         ),
@@ -87,20 +95,25 @@ const CartProvider = ({ children }) => {
           ...cart,
           {
             ...item,
-            quantity, 
+            quantity,
+            ...data,
           },
         ],
       });
 
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
-        [item._id]: quantity,
+        [item._id]: {
+          quantity,
+          ...data,
+        },
       }));
     }
   };
 
   const removeFromCart = (itemId) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: itemId });
+
     setQuantities((prevQuantities) => {
       const { [itemId]: removedItem, ...newQuantities } = prevQuantities;
       return newQuantities;
@@ -113,7 +126,16 @@ const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, quantities, subtotal }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        quantities,
+        subtotal,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

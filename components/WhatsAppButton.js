@@ -58,32 +58,56 @@ export default WhatsAppButton;
 
 const createWhatsAppURL = (inputs, items) => {
     const { address, fname, lname, phone } = inputs;
-
-    // Calculate the total amount
+  
     const totalAmount = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const colorNameMap = {
+        "#FF0000": "Red",
+        "#00FF00": "Green",
+        "#0000FF": "Blue",
+        "#FF00FF": "Magenta",
+        "#00FFFF": "Cyan",
+        "#FFFFFF": "White",
+        "#000000": "Black",
+        "#ffdc7a": "LightYellow",
+        "#A52A2A": "Brown",
+        "#800080": "Purple",
+        "#FFD700": "Gold",
+        "#008000": "DarkGreen",
+        "#808080": "Gray",
+        "#8B4513": "SaddleBrown",
+      };
+      
+      const getColorName = (hexCode) => {
+        return colorNameMap[hexCode] || 'N/A'; // Default to 'N/A' if no match is found
+      };
+      
+ 
 
-    // Formatting the message
+      
     const message = `
-    *Customer Information:*
-    Name: ${fname} ${lname} 
-    Phone: ${phone}
-    Address: ${address}
-
-    *Order Details:*
-    ${items.map((item, index) => `
-      Item ${index + 1}:
-      - Name: ${item.title} 
-      - Quantity: ${item.quantity}
-      - Price: $${item.price}
-      - Image: ${item.img[0]} 
-    `).join('\n')}
-
-    Subtotal: $${totalAmount.toFixed(2)}
-    Delivery fee: $5.00
-    *Total Amount:* $${(totalAmount + 5).toFixed(2)}
+  *Customer Information:*
+  Name: ${fname} ${lname}
+  Phone: ${phone}
+  Address: ${address}
+  
+  *Order Details:*
+  ${items.map((item, index) => `
+  Item ${index + 1}:
+  - Name: ${item.title}
+  - Quantity: ${item.quantity}
+  - Price: $${item.price}
+  - Size: ${item.size || 'N/A'}
+  - Color: ${getColorName(item.color) || 'N/A'}
+  - Image: ${item.img?.[0] || 'No image'}
+  `).join('\n')}
+  
+  Subtotal: $${totalAmount.toFixed(2)}
+  Delivery fee: $5.00
+  *Total Amount:* $${(totalAmount + 5).toFixed(2)}
   `;
-
+  
     const encodedMessage = encodeURIComponent(message);
-    const phoneNumber = '9613066976';  
+    const phoneNumber = '9613066976';
     return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-};
+  };
+  

@@ -472,7 +472,7 @@ const page = () => {
                                                             <div className="wfacp-pro-thumb">
                                                               <div className="wfacp-qty-ball" style={{ top: "-5px" }}>
                                                                 <div className="wfacp-qty-count">
-                                                                  <span className="wfacp-pro-count">{localQuantities[obj._id]}</span>
+                                                                  <span className="wfacp-pro-count">{obj.quantity}</span>
                                                                 </div>
                                                               </div>
                                                               <img src={""+obj.img[0]}
@@ -494,7 +494,7 @@ const page = () => {
                                                                 <span className="woocommerce-Price-currencySymbol">
                                                                   $
                                                                 </span>
-                                                                {(obj.price * localQuantities[obj._id] || obj.price).toFixed(2)}
+                                                                {(obj.price * obj.quantity || obj.price).toFixed(2)}
                                                               </bdi>
                                                             </span>{" "}
                                                           </div>

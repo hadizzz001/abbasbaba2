@@ -1,7 +1,5 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../app/context/CartContext';
-import { useState, useEffect } from "react";
 import { useBooleanValue } from '../app/context/CartBoolContext';
 
 const Cart = () => {
@@ -33,13 +31,6 @@ const Cart = () => {
         setLocalQuantities(quantities);
     }, [quantities]);
 
-
-
-
-
-
-
-
     const handleClickc = () => {
         var cartb = document.getElementById("cartid");
         var cartb2 = document.getElementById("cartid2");
@@ -47,22 +38,14 @@ const Cart = () => {
         if (cartb && cartb2) {
             if (isBooleanValue) {
                 cartb2.className += " MiniCart_Cart-visible";
-            }
-            else {
+            } else {
                 cartb2.classList.remove("MiniCart_Cart-visible");
             }
         }
     };
 
-
-
-
-
     return (
-
-
         <>
-
             <div>
                 <div className="MiniCart_Slider_Overlay" id='cartid' />
                 <div className="MiniCart_Slider">
@@ -77,7 +60,6 @@ const Cart = () => {
             <div className="Checkout">
                 <div id='cartid2' className="MiniCart_Cart " style={{ zIndex: "99999999" }}>
                     <div className="MiniCart_Cart_Heading br_text-grey-500">
-
                         <a href="/checkout" className="MiniCart_CartIndicator">
                             <svg viewBox="0 0 31 28">
                                 <circle cx={13} cy={24} r={2} />
@@ -106,39 +88,48 @@ const Cart = () => {
                                 <span className="Checkout_Cart_TableHeading_Total">Total price</span>
                             </div>
                             <div className="Checkout_Cart_LineItems">
-
-
-
-
-
-
-
                                 {cart && cart.length > 0 ? (
-                                    cart?.map((obj, index) => (
-
-                                        <div>
+                                    cart.map((obj, index) => (
+                                        <div key={obj._id}>
                                             <div className="Checkout_Cart_LineItems_LineItem">
                                                 <div className="Checkout_Cart_LineItems_LineItem_Thumb">
-                                                    <img src={""+obj.img[0]} />
+                                                    <img src={obj.img[0]} alt={obj.title} />
                                                 </div>
                                                 <div className="Checkout_Cart_LineItems_LineItem_Details">
-                                                    {obj.title}
+                                                    <div>{obj.title}</div>
                                                     <div>
                                                         <span>Category:</span>
                                                         <span>{obj.category}</span>
-                                                    </div> 
+                                                    </div>
+                                                    
                                                     <div className="Checkout_Cart_LineItems_LineItem_Details_Quantity">
                                                         <span>Qty:</span>
-                                                        <span>{localQuantities[obj._id] || 1}</span>
-                                                        
-
+                                                        <span>{obj.quantity}</span> 
                                                     </div>
-                                                    {errors[obj._id] && <p style={{ color: 'red' }}>{errors[obj._id]}<a style={{ color: "#4acb4a", display: "inline" }} href={`/product?id=${obj._id}&&custom=1&&imgg=${obj.img[0]}`}> add now</a></p>}
-                                                    <div
-                                                        className="Checkout_Cart_LineItems_LineItem_Price"
-                                                    >
+                                                    
+                                                    <div className="Checkout_Cart_LineItems_LineItem_Details_Size">
+                                                        <span>Size:</span>
+                                                        <span>{obj.size}</span> 
+                                                    </div>
+                                                    
+                                                    <div className="Checkout_Cart_LineItems_LineItem_Details_Color">
+                                                        <span>Color:</span>
+                                                        <span>{obj.color}</span>  
+                                                    </div>
+
+                                                    {errors[obj._id] && (
+                                                        <p style={{ color: 'red' }}>
+                                                            {errors[obj._id]}{' '}
+                                                            <a style={{ color: "#4acb4a", display: "inline" }} href={`/product?id=${obj._id}&&custom=1&&imgg=${obj.img[0]}`}>
+                                                                add now
+                                                            </a>
+                                                        </p>
+                                                    )}
+                                                    <div className="Checkout_Cart_LineItems_LineItem_Price">
                                                         <span className="Currency">
-                                                            <span className="Currency_Monetary">${(obj.price * localQuantities[obj._id] || obj.price)}</span>
+                                                            <span className="Currency_Monetary">
+                                                                ${(obj.price * obj.quantity).toFixed(2)}
+                                                            </span>
                                                             <span className="Currency_Code">USD</span>
                                                         </span>
                                                     </div>
@@ -154,32 +145,16 @@ const Cart = () => {
                                                 </button>
                                             </div>
                                         </div>
-
                                     ))
                                 ) : (
-                                    <div data-render-if="cart-is-empty" className="MiniCart_Cart_EmptyCart">
+                                    <div className="MiniCart_Cart_EmptyCart">
                                         <span>You have no items in your shopping cart.</span>
                                     </div>
                                 )}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 <div>
                                     <div className="Checkout_Cart_LineItems_LineItem Checkout_Cart_LineItems_LineItem-SalesPromotion Checkout_Cart_LineItems_LineItem-SalesPromotion-Custom">
-                                        <div className="Checkout_Cart_LineItems_LineItem_ContentBlock">
-                                        </div>
+                                        <div className="Checkout_Cart_LineItems_LineItem_ContentBlock"></div>
                                         <div className="Checkout_Cart_LineItems_LineItem_Details">
                                             <div className="Checkout_Cart_LineItems_LineItem_Price">
                                                 <span className="Currency">
@@ -193,22 +168,13 @@ const Cart = () => {
                             </div>
                         </div>
 
-                        <a class="Common_Button Common_Button--short MiniCart_Cart_CtaButton" href="/checkout" rel="nofollow"><span>Go to checkout</span></a>
-
+                        <a className="Common_Button Common_Button--short MiniCart_Cart_CtaButton" href="/checkout" rel="nofollow">
+                            <span>Go to checkout</span>
+                        </a>
                     </div>
- 
                 </div>
             </div>
-
-
-
-
-
-
-
         </>
-
-
     );
 };
 

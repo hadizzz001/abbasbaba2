@@ -30,7 +30,7 @@ const YourComponent = () => {
         }, {});
 
         // Define the desired category order
-        const categoryOrder = ['Men Shoes', 'Women Shoes', 'Kids Shoes'];
+        const categoryOrder = ['Men Shoes', 'Women Shoes', 'Kids Shoes','Men Clothes', 'Women Clothes', 'Kids Clothes'];
 
         // Sort grouped products based on the predefined order
         const sortedGroups = {};

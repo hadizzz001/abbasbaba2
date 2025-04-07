@@ -1,37 +1,12 @@
 import React, { useState } from 'react';
 
-const QuantitySelector = ({ initialQty = 1, onChange }) => {
+const QuantitySelector = ({ initialQty = 1, maxBoxes, onChange }) => {
   const [qty, setQty] = useState(initialQty);
-
-  const handleIncrement = () => {
-    setQty((prev) => {
-      const newQty = prev + 1;
-      onChange(newQty);
-      return newQty;
-    });
-  };
-
-  const handleDecrement = () => {
-    setQty((prev) => {
-      if (prev > 1) {
-        const newQty = prev - 1;
-        onChange(newQty);
-        return newQty;
-      }
-      return prev;
-    });
-  };
 
   const handleChange = (e) => {
     let value = e.target.value;
-
-    if (value === "") {
-      setQty("");
-      return;
-    }
-
-    value = parseInt(value, 10);
-    if (!isNaN(value) && value > 0) {
+    if (value) {
+      value = parseInt(value, 10);
       setQty(value);
       onChange(value);
     }
@@ -39,26 +14,18 @@ const QuantitySelector = ({ initialQty = 1, onChange }) => {
 
   return (
     <div className="quantity-selector">
-      <button
-        type="button"
-        onClick={handleDecrement}
-        style={{ width: "20px", backgroundColor: "#fff", marginRight: "5px", fontWeight: "900" }}
-      >
-        -
-      </button>
-      <input
-        type="number"
+      <select
         value={qty}
         onChange={handleChange}
-        style={{ width: "40px", textAlign: "center" }}
-      />
-      <button
-        type="button"
-        onClick={handleIncrement}
-        style={{ width: "20px", backgroundColor: "#fff", marginLeft: "5px", fontWeight: "900" }}
+        style={{ width: "60px", textAlign: "center", padding: "5px" }}
       >
-        +
-      </button>
+        {/* Map directly to the values in the maxBoxes array */}
+        {maxBoxes?.map((value) => (
+          <option key={value} value={value}>
+            {value}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };
