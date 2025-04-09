@@ -58,7 +58,6 @@ const WhatsAppButton = ({ inputs, items }) => {
 export default WhatsAppButton;
 
 
-// ✅ UPDATED FUNCTION with Android intent support
 const createWhatsAppURL = (inputs, items) => {
     const { address, fname, lname, phone } = inputs;
 
@@ -80,9 +79,7 @@ const createWhatsAppURL = (inputs, items) => {
         "#8B4513": "SaddleBrown",
     };
 
-    const getColorName = (hexCode) => {
-        return colorNameMap[hexCode] || 'N/A';
-    };
+    const getColorName = (hexCode) => colorNameMap[hexCode] || 'N/A';
 
     const message = `
 *Customer Information:*
@@ -104,15 +101,18 @@ Item ${index + 1}:
 Subtotal: $${totalAmount.toFixed(2)}
 Delivery fee: $5.00
 *Total Amount:* $${(totalAmount + 5).toFixed(2)}
-`;
+    `.trim();
 
     const encodedMessage = encodeURIComponent(message);
+    
+    // ✅ Make sure phone number has NO "+" and NO spaces
     const phoneNumber = '9613066976';
 
     const isAndroid = typeof navigator !== 'undefined' && /Android/i.test(navigator.userAgent);
 
     if (isAndroid) {
-        const intentURL = `intent://send/?phone=${phoneNumber}&text=${encodedMessage}#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
+        // ✅ Proper format for WhatsApp Business intent
+        const intentURL = `intent://send?phone=${phoneNumber}&text=${encodedMessage}#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
         return { url: intentURL, isAndroidIntent: true };
     } else {
         const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
