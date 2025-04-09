@@ -112,10 +112,10 @@ Delivery fee: $5.00
 
     if (isAndroid) {
         // ✅ Proper format for WhatsApp Business intent
-        const intentURL = `intent://send?phone=${phoneNumber}&text=${encodedMessage}#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
+        const intentURL = `intent://send?phone=${phoneNumber}&text=test#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
         return { url: intentURL, isAndroidIntent: true };
     } else {
-        const waUrl = `https://wa.me/9613066976`;
-        return { url: waUrl };
+        const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        return { url: waUrl, isAndroidIntent: false };
     }
 };
