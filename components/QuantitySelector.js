@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const QuantitySelector = ({ initialQty = 1, maxBoxes, onChange }) => {
+const QuantitySelector = ({ initialQty, maxBoxes, onChange }) => {
   const [qty, setQty] = useState(initialQty);
 
   const handleChange = (e) => {

@@ -95,6 +95,12 @@ const Page = () => {
   }, [cat]); // Runs only when `cat` changes and is defined
 
 
+  useEffect(() => {
+    if (box) { // Ensures `cat` is defined before running the effect
+ setQuantity(box[0]);
+    }
+  }, [box]);
+
 
  
 
