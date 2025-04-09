@@ -1,12 +1,28 @@
 // components/WhatsAppIcon.js
+'use client';
+import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const WhatsAppIcon = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    const isAndroid = typeof navigator !== 'undefined' && /Android/i.test(navigator.userAgent);
+    const phoneNumber = '9613066976';
+
+    if (isAndroid) {
+      // Try to open WhatsApp Business via intent on Android
+      window.location.href = `intent://send/?phone=${phoneNumber}#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
+    } else {
+      // Fallback for iOS or others
+      window.open(`https://wa.me/${phoneNumber}`, '_blank');
+    }
+  };
+
   return (
     <a
-      href="https://wa.me/+9613066976" // Replace with your WhatsApp number
-      target="_blank"
-      rel="noopener noreferrer"
+      href="https://wa.me/9613066976"
+      onClick={handleClick}
       style={{
         position: 'fixed',
         bottom: '70px',
@@ -18,11 +34,12 @@ const WhatsAppIcon = () => {
         height: '50px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center', 
+        justifyContent: 'center',
         zIndex: 1000,
+        boxShadow: '0 2px 6px rgba(0,0,0,0.2)'
       }}
     >
-     <svg
+ <svg
   viewBox="0 0 48 48"
   version="1.1"
   xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +70,6 @@ const WhatsAppIcon = () => {
     </g>{" "}
   </g>
 </svg>
-
     </a>
   );
 };
