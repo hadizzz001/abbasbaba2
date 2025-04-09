@@ -115,7 +115,7 @@ Delivery fee: $5.00
         const intentURL = `intent://send?phone=${phoneNumber}&text=${encodedMessage}#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
         return { url: intentURL, isAndroidIntent: true };
     } else {
-        const waUrl = `https://wa.me/${phoneNumber}`;
-        return { url: waUrl, isAndroidIntent: false };
+        const waUrl = `https://wa.me/9613066976`;
+        return { url: waUrl };
     }
 };
