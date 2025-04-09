@@ -3,15 +3,10 @@ import { useCart } from '../app/context/CartContext';
 import { useState } from 'react';
 
 const WhatsAppButton = ({ inputs, items }) => {
-    const { cart, removeFromCart, updateQuantity, clearCart, isModalOpen, toggleModal } = useCart();
+    const { clearCart } = useCart();
     const [error, setError] = useState(null);
 
-
- 
-    
-
-    const createOrder =  () => { 
-        
+    const createOrder = () => {
         fetch('api/sendOrder', {
             method: 'POST',
             headers: {
@@ -30,8 +25,14 @@ const WhatsAppButton = ({ inputs, items }) => {
             return;
         }
 
-        const url = createWhatsAppURL(inputs, items);
-        window.open(url, '_blank');
+        const { url, isAndroidIntent } = createWhatsAppURL(inputs, items);
+
+        if (isAndroidIntent) {
+            window.location.href = url; // Use intent on Android
+        } else {
+            window.open(url, '_blank'); // Fallback for iOS or desktop
+        }
+
         createOrder();
         clearCart();
         setError(null);
@@ -56,9 +57,11 @@ const WhatsAppButton = ({ inputs, items }) => {
 
 export default WhatsAppButton;
 
+
+// ✅ UPDATED FUNCTION with Android intent support
 const createWhatsAppURL = (inputs, items) => {
     const { address, fname, lname, phone } = inputs;
-  
+
     const totalAmount = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const colorNameMap = {
         "#FF0000": "Red",
@@ -75,39 +78,44 @@ const createWhatsAppURL = (inputs, items) => {
         "#008000": "DarkGreen",
         "#808080": "Gray",
         "#8B4513": "SaddleBrown",
-      };
-      
-      const getColorName = (hexCode) => {
-        return colorNameMap[hexCode] || 'N/A'; // Default to 'N/A' if no match is found
-      };
-      
- 
+    };
 
-      
+    const getColorName = (hexCode) => {
+        return colorNameMap[hexCode] || 'N/A';
+    };
+
     const message = `
-  *Customer Information:*
-  Name: ${fname} ${lname}
-  Phone: ${phone}
-  Address: ${address}
-  
-  *Order Details:*
-  ${items.map((item, index) => `
-  Item ${index + 1}:
-  - Name: ${item.title}
-  - Quantity: ${item.quantity}
-  - Price: $${item.price}
-  - Size: ${item.size || 'N/A'}
-  - Color: ${getColorName(item.color) || 'N/A'}
-  - Image: ${item.img?.[0] || 'No image'}
-  `).join('\n')}
-  
-  Subtotal: $${totalAmount.toFixed(2)}
-  Delivery fee: $5.00
-  *Total Amount:* $${(totalAmount + 5).toFixed(2)}
-  `;
-  
+*Customer Information:*
+Name: ${fname} ${lname}
+Phone: ${phone}
+Address: ${address}
+
+*Order Details:*
+${items.map((item, index) => `
+Item ${index + 1}:
+- Name: ${item.title}
+- Quantity: ${item.quantity}
+- Price: $${item.price}
+- Size: ${item.size || 'N/A'}
+- Color: ${getColorName(item.color)}
+- Image: ${item.img?.[0] || 'No image'}
+`).join('\n')}
+
+Subtotal: $${totalAmount.toFixed(2)}
+Delivery fee: $5.00
+*Total Amount:* $${(totalAmount + 5).toFixed(2)}
+`;
+
     const encodedMessage = encodeURIComponent(message);
     const phoneNumber = '9613066976';
-    return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-  };
-  
+
+    const isAndroid = typeof navigator !== 'undefined' && /Android/i.test(navigator.userAgent);
+
+    if (isAndroid) {
+        const intentURL = `intent://send/?phone=${phoneNumber}&text=${encodedMessage}#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
+        return { url: intentURL, isAndroidIntent: true };
+    } else {
+        const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        return { url: waUrl, isAndroidIntent: false };
+    }
+};
