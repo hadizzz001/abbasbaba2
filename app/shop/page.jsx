@@ -8,16 +8,28 @@ const Body = () => {
   const [isActive1, setIsActive1] = useState(true);
   const [checkboxesData, setCheckboxesData] = useState([]);
   const [checkedCategories, setCheckedCategories] = useState([]); // Store selected category IDs
+ 
+  const [codes, setCodes] = useState([]);
   const [isCodeValid, setIsCodeValid] = useState(false);
 
   useEffect(() => {
-    // Check localStorage for the code
-    const storedCode = localStorage.getItem("accessCode");
-    if (storedCode === "abcd12345") {
-      setIsCodeValid(true);
-    }
+    fetch("/api/code")
+      .then((res) => res.json())
+      .then((data) => {
+        setCodes(data);
+
+        const storedCode = localStorage.getItem("accessCode");
+        const matchedCode = data.find((c) => c.code === storedCode);
+
+        // Allow if the stored code exists and has been marked as used
+        if (matchedCode && matchedCode.isUsed) {
+          setIsCodeValid(true);
+        }
+      })
+      .catch((err) => console.error("Error fetching codes:", err));
   }, []);
 
+ 
 
 
 
@@ -325,7 +337,7 @@ const Body = () => {
                             <div style={{ textAlign: "center" }} className="initial:br_row-span-1 br_col-start-1 br_row-start-2 br_px-3 group-[.centered]/tile:br_justify-center group-[.centered]/tile:br_text-center">
                               <h3 className="br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
                                 <a
-                                  href={`/product?id=${item._id}&img=${encodeURIComponent(item.img?.[0]?.replace('/upload/', '/upload/w_500/q_auto/f_auto/') || '')}`}
+                                  href={`/product?id=${item._id}&&imgg=${encodeURIComponent(item.img?.[0]?.replace('/upload/', '/upload/w_500/q_auto/f_auto/') || '')}`}
 
                                   className="br_text-current br_no-underline"
                                   id='anchorNew'

@@ -9,18 +9,14 @@ import { useBooleanValue } from '../context/CartBoolContext';
 import QuantitySelector from '../../components/QuantitySelector';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import 'swiper/css'; 
+import 'swiper/css';
 import Head from 'next/head'
 
 const Page = () => {
-  const [code, setCode] = useState("");
-  const [isCodeValid, setIsCodeValid] = useState(false);
   const [translateXValue, setTranslateXValue] = useState(0);
   const [isActive1, setIsActive1] = useState(true);
   const [isActive2, setIsActive2] = useState(true);
-  const [quantity, setQuantity] = useState(1); // State for quantity
-  let b;
-  let b2;
+  const [quantity, setQuantity] = useState(1);
   const searchParams = useSearchParams();
   const search = searchParams.get('id');
   const custom = searchParams.get('custom');
@@ -34,10 +30,23 @@ const Page = () => {
   const specificItem = cart?.find((cartItem) => String(cartItem._id) === String(search));
   const router = useRouter();
   const [allTemp1, setAllTemps1] = useState();
-  const [allTemp2, setAllTemps2] = useState(); 
-
+  const [allTemp2, setAllTemps2] = useState();
   const [selectedColor, setSelectedColor] = useState('');
-  const [selectedSize, setSelectedSize] = useState(''); 
+  const [selectedSize, setSelectedSize] = useState('');
+
+  const [code, setCode] = useState("");
+  const [codes, setCodes] = useState([]);
+  const [isCodeValid, setIsCodeValid] = useState(false);
+
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    const url = `https://abbasbaba.hadizproductions.com?id=${search}&&imgg=${imgg}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // reset after 2 sec
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,21 +55,21 @@ const Page = () => {
         const response = await fetch('api/products');
         const data = await response.json();
         console.log("all data: ", data);
-  
+
         // Filter the data based on the search criteria (assuming 'search' is the id)
         const filteredProduct = data.filter(item => item._id === search);
         console.log("all filteredProduct: ", filteredProduct);
-        
+
         // Set the filtered product (or an empty array if no match)
         setAllTemps1(filteredProduct.length > 0 ? filteredProduct[0] : null);
       } catch (error) {
         console.error("Error fetching the products:", error);
       }
     };
-  
+
     fetchData();
   }, []); // Add 'search' as a dependency to re-fetch when it changes
-  
+
 
 
 
@@ -97,12 +106,12 @@ const Page = () => {
 
   useEffect(() => {
     if (box) { // Ensures `cat` is defined before running the effect
- setQuantity(box[0]);
+      setQuantity(box[0]);
     }
   }, [box]);
 
 
- 
+
 
   const sv = -8.3333333;
 
@@ -110,19 +119,7 @@ const Page = () => {
     setTranslateXValue(idx * sv);
   };
 
-  const handleClick1 = () => {
-    var d2 = document.getElementById("specID");
-    setIsActive1(!isActive1);
-    if (d2) {
-      if (isActive1) {
-        d2.className += " DynamicAccordion_Tab--open";
-        d2.classList.remove("DynamicAccordion_Tab--closed");
-      } else {
-        d2.className += " DynamicAccordion_Tab--closed";
-        d2.classList.remove("DynamicAccordion_Tab--open");
-      }
-    }
-  };
+
 
   const handleClick2 = () => {
     var d2 = document.getElementById("shipID");
@@ -169,7 +166,7 @@ const Page = () => {
     e.preventDefault();
     const data = {
       color: selectedColor,
-      size: selectedSize,  
+      size: selectedSize,
     };
     addToCart(allTemp1, quantity, data); // Pass the third parameter, allTemp1
     handleClickc(); // Custom function for further actions, if needed
@@ -182,36 +179,61 @@ const Page = () => {
 
 
 
+
+
+
+
   useEffect(() => {
-    // Check localStorage for the code
-    const storedCode = localStorage.getItem("accessCode");
-    if (storedCode === "abcd12345") {
-      setIsCodeValid(true);
-    }
-  }, []);
+    fetch("/api/code")
+      .then((res) => res.json())
+      .then((data) => {
+        setCodes(data);
 
-  const handleCodeSubmit = () => {
-    if (code === "abcd12345") {
-      localStorage.setItem("accessCode", code);
-      setIsCodeValid(true);
+        const storedCode = localStorage.getItem("accessCode");
+        const matchedCode = data.find((c) => c.code === storedCode);
+
+        // Allow if the stored code exists and has been marked as used
+        if (matchedCode && matchedCode.isUsed) {
+          setIsCodeValid(true);
+        }
+      })
+      .catch((err) => console.error("Error fetching codes:", err));
+  }, [code]);
+
+  const handleCodeSubmit = async () => {
+    const matchedCode = codes.find((c) => c.code === code && !c.isUsed);
+
+    if (matchedCode) {
+      try {
+        // Mark code as used via PATCH
+        await fetch(`/api/code`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ isUsed: true, code: matchedCode.code }),
+        });
+
+        // Store it locally and allow access
+        localStorage.setItem("accessCode", matchedCode.code);
+        setIsCodeValid(true);
+      } catch (error) {
+        console.error("Failed to update code:", error);
+        alert("Something went wrong.");
+      }
     } else {
-      alert("Invalid Code");
+      alert("Invalid or already used code");
     }
   };
 
-  const handleClickr = () => { 
-    sessionStorage.setItem("imgg", imgg);
-    router.push(`/prod.html`);
-  };
- 
-  
+
 
   return (
     <>
- <Head>
+      <Head>
         <meta property="og:title" content="Abbas Baba" />
         <meta property="og:url" content="https://abbasbaba.com/" />
-        <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." /> 
+        <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:type" content="website" />
@@ -312,8 +334,8 @@ const Page = () => {
                     </p>
                     <p className='mb-2'>
                       Brand: {brand}
-                    </p> 
- 
+                    </p>
+
                   </span>
                   <div className="ApexPriceAndFreeShippingWrapper">
 
@@ -432,41 +454,39 @@ const Page = () => {
 
 
                               <div>
-        <label className="block mb-2 font-semibold">Select Color:</label>
-        <div className="flex gap-2">
-          {colors?.map((color) => (
-            <div
-              key={color}
-              onClick={() => setSelectedColor(color)}
-              className={`w-10 h-10 rounded-full border-2 cursor-pointer transition-all duration-150 ${
-                selectedColor === color ? 'ring-2 ring-offset-2 ring-blue-500' : ''
-              }`}
-              style={{ backgroundColor: color }}
-            ></div>
-          ))}
-        </div>
-      </div>
+                                <label className="block mb-2 font-semibold">Select Color:</label>
+                                <div className="flex gap-2">
+                                  {colors?.map((color) => (
+                                    <div
+                                      key={color}
+                                      onClick={() => setSelectedColor(color)}
+                                      className={`w-10 h-10 rounded-full border-2 cursor-pointer transition-all duration-150 ${selectedColor === color ? 'ring-2 ring-offset-2 ring-blue-500' : ''
+                                        }`}
+                                      style={{ backgroundColor: color }}
+                                    ></div>
+                                  ))}
+                                </div>
+                              </div>
 
-      {/* Size Selection */}
-      <div>
-        <label className="block mb-2 font-semibold">Select Size:</label>
-        <div className="flex gap-2">
-          {sizes?.map((size) => (
-            <button
-              key={size}
-              type="button"
-              onClick={() => setSelectedSize(size)}
-              className={`border px-4 py-2 rounded transition-all duration-150 ${
-                selectedSize === size
-                  ? 'bg-blue-600 text-white border-blue-600'
-                  : 'bg-white text-black'
-              }`}
-            >
-              {size}
-            </button>
-          ))}
-        </div>
-      </div>
+                              {/* Size Selection */}
+                              <div>
+                                <label className="block mb-2 font-semibold">Select Size:</label>
+                                <div className="flex gap-2">
+                                  {sizes?.map((size) => (
+                                    <button
+                                      key={size}
+                                      type="button"
+                                      onClick={() => setSelectedSize(size)}
+                                      className={`border px-4 py-2 rounded transition-all duration-150 ${selectedSize === size
+                                          ? 'bg-blue-600 text-white border-blue-600'
+                                          : 'bg-white text-black'
+                                        }`}
+                                    >
+                                      {size}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
 
 
 
@@ -493,6 +513,13 @@ const Page = () => {
                     )}
                     <br />
                   </div>
+
+                  <button
+                    onClick={handleCopy}
+                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  >
+                    {copied ? 'Copied!' : 'Copy Link'}
+                  </button>
                   <span className="ProvidersIfSelectedProductMatchesFilter">
                   </span>
                   <div className="DynamicAccordion" data-behaviour="tabs" id="dynamic_tabs_misc">

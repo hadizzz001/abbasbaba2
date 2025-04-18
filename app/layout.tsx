@@ -10,6 +10,7 @@ import { CartProvider } from './context/CartContext';
 import { BooleanProvider } from './context/CartBoolContext'; 
 import GifLoader from '../components/GifLoader'
 import WhatsAppIcon from '../components/WhatsAppIcon';
+import Offer from '../components/Offer';
 import Script from "next/script";
 import { GoogleAnalytics } from '@next/third-parties/google'
 
@@ -89,14 +90,16 @@ export default function RootLayout({
 
       <body>
 
- 
+     
       <GifLoader />
+      <Offer />
 
         
         <BooleanProvider>
         <CartProvider>
           <Navbar2 />
           <WhatsAppIcon />
+          
           {children}
           <GoogleAnalytics gaId="G-GKVJEXB18C" />
           <Footer />

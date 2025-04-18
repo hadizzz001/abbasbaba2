@@ -93,30 +93,30 @@ body {
 
 
 .sywVideo {
-  color: #231f20 !important;
+  color: #36373b !important;
   background-color: transparent !important;
 }
 
 .sywCarousel {
-  color: #231f20 !important;
+  color: #36373b !important;
 }
 
 .sywProductTabs-title {
-  color: #231f20 !important;
+  color: #36373b !important;
   background-color: transparent !important;
 }
 
 .sywPaymentOptions {
-  color: #231f20 !important;
+  color: #36373b !important;
 }
 
 .SiteFooter__wrapper {
-  background: #231f20 !important;
+  background: #36373b !important;
 }
 
 
 a:hover {
-  color: #398dcc !important;
+  color: #5bbccd !important;
   text-decoration: none;
 }
 
@@ -127,7 +127,7 @@ a:hover {
 
 .syw-cta-desktop:hover,
 .syw-cta-desktop:focus {
-  color: #231f20 !important;
+  color: #36373b !important;
   text-decoration: none;
 }
 
@@ -142,7 +142,7 @@ a:hover {
   font-family: "Lato", sans-serif;
   font-size: 12px;
   font-weight: 700;
-  background: #398dcc;
+  background: #5bbccd;
   text-align: center;
   padding: 0 5px;
   min-width: 100%;
@@ -174,7 +174,7 @@ a:hover {
 
 @media (max-width: 2300px) and (max-height: 900px) {
   #PageMenuPreHeader {
-    background-color: #231f20
+    background-color: #36373b
   }
 }
 
@@ -240,7 +240,7 @@ a:hover {
 
 
 #anchorNew:hover {
-  color: #231f20 !important;
+  color: #36373b !important;
 }
 
 .form-control {
@@ -269,7 +269,7 @@ a:hover {
 
 
 .HtmlProductAddToCart {
-  background-color: #398dcc !important;
+  background-color: #5bbccd !important;
 }
 
 button:focus {
@@ -410,7 +410,29 @@ button:focus {
 }
 
 
+#page-header-homepage-1{
+  margin-top:2em;
+}
+
+ #hamburger{
+  margin-top: 2em;
+ }
+
+ .searchOverlay{
+  top: 4em !important;
+ }
+
+ .pageHeaderMenuOverlay__close{
+  top: 5em !important;
+ }
  
+  .SiteFooterSitemap .column { 
+      background: #36373b !important; 
+  } 
+
+  #yourDivId{
+    margin-top: 7em;
+  }
 
 
 }

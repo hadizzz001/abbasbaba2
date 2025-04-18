@@ -5,7 +5,8 @@ import 'swiper/css';
 import CarCard from './CarCard'; // Ensure this component exists
 
 const YourComponent = () => { 
-    const [allTemps, setAllTemps] = useState(); // Stores products per category
+    const [allTemps, setAllTemps] = useState();
+    
 
     useEffect(() => {
         fetchCategories();

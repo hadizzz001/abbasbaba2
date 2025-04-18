@@ -2,19 +2,20 @@
 import { useState, useEffect } from "react";
 import ProductList from './ProductList'; 
 import ProductList1 from './ProductList1'; 
-import ProductArrival from './ProductArrival'; 
-import ProductList2 from './ProductList2'; 
+import ProductArrival from './ProductArrival';  
 import Contact from './Contact'; 
 import Design from './Design';
 import Review from './Review';
 import Rate from './Rate';
 import Carousel from './Carousel';
-import BrandCarousel from './BrandCarousel';
-import Image from 'next/image';
+import Carousel1 from './Carousel1';
+import Box from './Box';
+import BrandCarousel from './BrandCarousel'; 
 import Catslider from './Catslider';
 import TikTokEmbed from './TikTokEmbed';
 import FacebookEmbed from './FacebookEmbed';
 import InstagramPost from './InstagramPost'; 
+import StickyMapButton from './StickyMapButton'; 
 
 
 
@@ -25,7 +26,7 @@ const Body = () => {
 
 
   useEffect(() => {
-    const refreshInterval = 1 * 60 * 1000; // 10 minutes in milliseconds
+    const refreshInterval = 2 * 60 * 1000; // 10 minutes in milliseconds
 
     const timer = setTimeout(() => {
       window.location.reload(); // Hard refresh
@@ -159,13 +160,15 @@ const Body = () => {
 
 
         <div id="usp-scroll-to"></div>
-
+        <Box />  
+        <StickyMapButton />  
         <Carousel />
         <Catslider />
         <BrandCarousel />
         {/* <ProductList2 /> */}
         <ProductArrival />
         <ProductList />
+        <Carousel1 />
         <ProductList1 />
         <Design />
         

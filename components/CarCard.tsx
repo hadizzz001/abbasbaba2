@@ -14,13 +14,27 @@ const CarCard = ({ temp }: CarCardProps) => {
 
   const [isCodeValid, setIsCodeValid] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [codes, setCodes] = useState([]); 
+  
+    useEffect(() => {
+      fetch("/api/code")
+        .then((res) => res.json())
+        .then((data) => {
+          setCodes(data);
+  
+          const storedCode = localStorage.getItem("accessCode");
+          const matchedCode = data.find((c) => c.code === storedCode);
+  
+          // Allow if the stored code exists and has been marked as used
+          if (matchedCode && matchedCode.isUsed) {
+            setIsCodeValid(true);
+          }
+        })
+        .catch((err) => console.error("Error fetching codes:", err));
+    }, []);
 
   useEffect(() => {
-    // Check localStorage for the code
-    const storedCode = localStorage.getItem("accessCode");
-    if (storedCode === "abcd12345") {
-      setIsCodeValid(true);
-    }
+ 
 
     // Auto-slide images every 3 seconds
     const interval = setInterval(() => {
