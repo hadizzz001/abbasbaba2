@@ -8,28 +8,29 @@ const MyComponent = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchBanner = async () => {
-      try {
-        const response = await fetch("/api/banner");
-        const data = await response.json();
-
-        if (data[0]?.img && data[0].img.length > 0) {
-          setBannerUrl(data[0].img[0]);
-        } else {
-          setError("No banner image available");
-        }
-      } catch (error) {
-        console.error("Failed to fetch banner:", error);
-        setError("Failed to fetch banner");
-      } finally {
-        setLoading(false);
-      }
+    const fetchBanner = () => {
+      fetch("/api/banner")
+        .then((response) => response.json())
+        .then((data) => {
+          if (data[0]?.img && data[0].img.length > 0) {
+            setBannerUrl(data[0].img[0]);
+          } else {
+            setError("No banner image available");
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to fetch banner:", error);
+          setError("Failed to fetch banner");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     };
-
+  
     fetchBanner();
   }, []);
-
-  console.log("bannerUrl:", bannerUrl);
+  
+ 
 
   return (
     <div className=" mt-1">

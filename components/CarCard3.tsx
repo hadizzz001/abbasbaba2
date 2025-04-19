@@ -15,25 +15,8 @@ const CarCard = ({ temp }: CarCardProps) => {
     const { _id, name,  img } = temp;
 
  
-  const [codes, setCodes] = useState([]);
-  const [isCodeValid, setIsCodeValid] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/code")
-      .then((res) => res.json())
-      .then((data) => {
-        setCodes(data);
-
-        const storedCode = localStorage.getItem("accessCode");
-        const matchedCode = data.find((c) => c.code === storedCode);
-
-        // Allow if the stored code exists and has been marked as used
-        if (matchedCode && matchedCode.isUsed) {
-          setIsCodeValid(true);
-        }
-      })
-      .catch((err) => console.error("Error fetching codes:", err));
-  }, []);
+ 
+  
 
 
     return (

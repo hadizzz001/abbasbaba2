@@ -182,39 +182,20 @@ const Page = () => {
 
 
 
-
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch all codes
-        const response = await fetch("/api/code");
-        const data = await response.json();
-        setCodes(data);
-  
-        // Get the stored code from localStorage
-        const storedCode = localStorage.getItem("accessCode");
-  
-        // Find the matched code
-        const matchedCode = data.find((c) => c.code === storedCode);
-  
-        // Allow if the stored code exists and has been marked as used
-        if (matchedCode && matchedCode.isUsed) {
-          setIsCodeValid(true);
-        }
-      } catch (err) {
-        console.error("Error fetching codes:", err);
-      }
-    };
-  
-    fetchData();
-  }, [code]);
-  
+    const storedValidity = localStorage.getItem("isValidCode");
+    setIsCodeValid(storedValidity === "true");
+  }, []);
 
   const handleCodeSubmit = async () => {
-    const matchedCode = codes.find((c) => c.code === code && !c.isUsed);
-
-    if (matchedCode) {
-      try {
+    try {
+      const response = await fetch("https://abbasbaba-dash.netlify.app/api/code");
+      if (!response.ok) throw new Error("Failed to fetch codes");
+  
+      const data = await response.json();
+      const matchedCode = data.find((c) => c.code === code && !c.isUsed);
+  
+      if (matchedCode) {
         // Mark code as used via PATCH
         await fetch(`/api/code`, {
           method: "PATCH",
@@ -223,31 +204,26 @@ const Page = () => {
           },
           body: JSON.stringify({ isUsed: true, code: matchedCode.code }),
         });
-
-        // Store it locally and allow access
+  
+        // Store and update validity
         localStorage.setItem("accessCode", matchedCode.code);
+        localStorage.setItem("isValidCode", "true");
         setIsCodeValid(true);
-      } catch (error) {
-        console.error("Failed to update code:", error);
-        alert("Something went wrong.");
+      } else {
+        alert("Invalid or already used code");
       }
-    } else {
-      alert("Invalid or already used code");
+    } catch (error) {
+      console.error("Failed to submit code:", error);
+      alert("Something went wrong.");
     }
   };
+  
 
 
 
   return (
     <>
-      <Head>
-        <meta property="og:title" content="Abbas Baba" />
-        <meta property="og:url" content="https://abbasbaba.com/" />
-        <meta property="og:site_name" content="At Abbas Baba, we're reshaping the way businesses connect." />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:type" content="website" />
-      </Head>
+ 
       <style
         dangerouslySetInnerHTML={{
           __html: "\n\n.uploadcare--widget__button, .uploadcare--widget__button:hover {\n\tpadding: 10px;\n\tbackground-color: #d7d7d7; \n  color: #212529;\n  width:100%;\n}\n\n.uploadcare--widget__button:hover {\n\tbackground-color: #c1c1c1;\n  \n}\n\n\n"
