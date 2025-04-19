@@ -80,7 +80,7 @@ const OfferBox = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" style={{zIndex: 99999999999}}>
       <div
         ref={boxRef}
         className="relative bg-white rounded-xl shadow-xl p-6 w-[90%] max-w-lg text-center"

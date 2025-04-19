@@ -184,21 +184,31 @@ const Page = () => {
 
 
   useEffect(() => {
-    fetch("/api/code")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        // Fetch all codes
+        const response = await fetch("/api/code");
+        const data = await response.json();
         setCodes(data);
-
+  
+        // Get the stored code from localStorage
         const storedCode = localStorage.getItem("accessCode");
+  
+        // Find the matched code
         const matchedCode = data.find((c) => c.code === storedCode);
-
+  
         // Allow if the stored code exists and has been marked as used
         if (matchedCode && matchedCode.isUsed) {
           setIsCodeValid(true);
         }
-      })
-      .catch((err) => console.error("Error fetching codes:", err));
+      } catch (err) {
+        console.error("Error fetching codes:", err);
+      }
+    };
+  
+    fetchData();
   }, [code]);
+  
 
   const handleCodeSubmit = async () => {
     const matchedCode = codes.find((c) => c.code === code && !c.isUsed);

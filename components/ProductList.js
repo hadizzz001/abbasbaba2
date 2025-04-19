@@ -50,7 +50,7 @@ const YourComponent = () => {
   };
 
   return (
-    <div className="ProvidersIfSelectedProductMatchesFilter mt-4">
+    <div className="ProvidersIfSelectedProductMatchesFilter ">
       {groupedProducts && Object.keys(groupedProducts).length > 0 ? (
         Object.keys(groupedProducts).map((category) => (
           <div key={category}>
@@ -99,7 +99,7 @@ const YourComponent = () => {
               </div>
 
               {groupedProducts[category].length > 0 ? (
-                <section className="mb-5" style={{ maxWidth: "100%" }}>
+                <section className="" style={{ maxWidth: "100%" }}>
                   <Swiper
                     spaceBetween={5}
                     loop

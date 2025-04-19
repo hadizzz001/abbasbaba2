@@ -31,7 +31,7 @@ const YourComponent = () => {
 
 
     return (
-        <div className="ProvidersIfSelectedProductMatchesFilter mt-4">
+        <div className="ProvidersIfSelectedProductMatchesFilter">
 
             <content-block slug="product-page-wssb">
                 <div className="ProductTile-SliderContainer ProductTile-SliderContainer--YMAL">
@@ -81,7 +81,7 @@ const YourComponent = () => {
                                     </div>
 
                                     {allTemps.length > 0 ? (
-                                        <section className=' mb-5' style={{ maxWidth: "100%" }}>
+                                        <section className='' style={{ maxWidth: "100%" }}>
                                             <Swiper spaceBetween={5} loop breakpoints={{
                                                 150: {
                                                     slidesPerView: 3,
