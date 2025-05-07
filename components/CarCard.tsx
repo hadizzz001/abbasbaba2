@@ -86,7 +86,7 @@ const CarCard = ({ temp }: CarCardProps) => {
                     {!isCodeValid ? (
                       <span></span>
                     ) : (
-                      <span>${price}</span>
+                      <span style={{color:'#398dcc'}}>${price}</span>
                     )}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}>
                       <svg
