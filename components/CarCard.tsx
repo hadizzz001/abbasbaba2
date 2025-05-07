@@ -10,27 +10,23 @@ interface CarCardProps {
 }
 
 const CarCard = ({ temp }: CarCardProps) => {
-  const { _id, title, price, img, category } = temp;
+  const { _id, title, price, img, category, views } = temp;
 
   const [isCodeValid, setIsCodeValid] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
- 
-  
-    useEffect(() => {
-      const storedValidity = localStorage.getItem("isValidCode");
-      console.log("storedValidity ",storedValidity);
-      
-      if (storedValidity === "true") {
-        setIsCodeValid(true);
-      } else {
-        setIsCodeValid(false);
-      }
-    }, []);
-    
 
   useEffect(() => {
- 
+    const storedValidity = localStorage.getItem("isValidCode");
+    console.log("storedValidity ", storedValidity);
 
+    if (storedValidity === "true") {
+      setIsCodeValid(true);
+    } else {
+      setIsCodeValid(false);
+    }
+  }, []);
+
+  useEffect(() => {
     // Auto-slide images every 3 seconds
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
@@ -92,6 +88,42 @@ const CarCard = ({ temp }: CarCardProps) => {
                     ) : (
                       <span>${price}</span>
                     )}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}>
+                      <svg
+                        version="1.0"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 64 64"
+                        xmlSpace="preserve"
+                        fill="#222"
+                        stroke="#222"
+                        style={{ width: '16px', height: '16px' }}
+                      >
+                        <g id="SVGRepo_bgCarrier" strokeWidth={0} />
+                        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+                        <g id="SVGRepo_iconCarrier">
+                          <g>
+                            <path
+                              fill="#ffffff"
+                              d="M32,48.001c-14.195,0-21.43-11.734-23.59-15.989C10.574,27.793,17.891,16,32,16 
+          c14.195,0,21.431,11.734,23.591,15.988C53.427,36.208,46.109,48.001,32,48.001z"
+                            />
+                            <g>
+                              <path
+                                fill="#222"
+                                d="M63.716,30.516C63.349,29.594,54.45,8,32,8C9.55,8,0.652,29.594,0.285,30.516
+            c-0.379,0.953-0.379,2.016,0,2.969C0.652,34.407,9.55,56.001,32,56.001c22.45,0,31.349-21.594,31.716-22.517
+            C64.095,32.531,64.095,31.469,63.716,30.516z M32,48.001c-14.195,0-21.43-11.734-23.59-15.989
+            C10.574,27.793,17.891,16,32,16c14.195,0,21.431,11.734,23.591,15.988C53.427,36.208,46.109,48.001,32,48.001z"
+                              />
+                              <circle fill="#222" cx={32} cy={32} r={8} />
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                      <span>{views}</span>
+                    </div>
                     <span className="br_absolute br_inset-0 br_z-10" />
                   </a>
                 </h3>

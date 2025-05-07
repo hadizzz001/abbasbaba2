@@ -21,7 +21,7 @@ const Page = () => {
   const search = searchParams.get('id');
   const custom = searchParams.get('custom');
   const imgg = searchParams.get('imgg');
-  let imgs, title, price, desc, cat, brand, sub, box, colors, sizes;
+  let imgs, title, price, desc, cat, brand, sub, box, colors, sizes, views;
   const { cart, addToCart } = useCart();
   const { isBooleanValue, setBooleanValue } = useBooleanValue();
   const targetRef = useRef(null);
@@ -33,6 +33,7 @@ const Page = () => {
   const [allTemp2, setAllTemps2] = useState();
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+  const hasRun = useRef(false);
 
   const [code, setCode] = useState("");
   const [codes, setCodes] = useState([]);
@@ -54,11 +55,9 @@ const Page = () => {
         // Fetch all products
         const response = await fetch('api/products');
         const data = await response.json();
-        console.log("all data: ", data);
 
         // Filter the data based on the search criteria (assuming 'search' is the id)
         const filteredProduct = data.filter(item => item._id === search);
-        console.log("all filteredProduct: ", filteredProduct);
 
         // Set the filtered product (or an empty array if no match)
         setAllTemps1(filteredProduct.length > 0 ? filteredProduct[0] : null);
@@ -84,6 +83,7 @@ const Page = () => {
     desc = allTemp1.description;
     colors = allTemp1.color;
     sizes = allTemp1.size;
+    views = allTemp1.views;
   }
 
 
@@ -191,10 +191,10 @@ const Page = () => {
     try {
       const response = await fetch("https://abbasbaba-dash.netlify.app/api/code");
       if (!response.ok) throw new Error("Failed to fetch codes");
-  
+
       const data = await response.json();
       const matchedCode = data.find((c) => c.code === code && !c.isUsed);
-  
+
       if (matchedCode) {
         // Mark code as used via PATCH
         await fetch(`/api/code`, {
@@ -204,7 +204,7 @@ const Page = () => {
           },
           body: JSON.stringify({ isUsed: true, code: matchedCode.code }),
         });
-  
+
         // Store and update validity
         localStorage.setItem("accessCode", matchedCode.code);
         localStorage.setItem("isValidCode", "true");
@@ -217,13 +217,31 @@ const Page = () => {
       alert("Something went wrong.");
     }
   };
-  
+
+
+
+  useEffect(() => {
+    const updateViews = async () => {
+      try {
+        await fetch(`/api/products/${search}`, {
+          method: 'PATCH',
+        });
+      } catch (error) {
+        console.error('Error updating product views:', error);
+      }
+    };
+
+    if (!hasRun.current && search) {
+      updateViews();
+      hasRun.current = true;
+    }
+  }, [search]);
 
 
 
   return (
     <>
- 
+
       <style
         dangerouslySetInnerHTML={{
           __html: "\n\n.uploadcare--widget__button, .uploadcare--widget__button:hover {\n\tpadding: 10px;\n\tbackground-color: #d7d7d7; \n  color: #212529;\n  width:100%;\n}\n\n.uploadcare--widget__button:hover {\n\tbackground-color: #c1c1c1;\n  \n}\n\n\n"
@@ -311,6 +329,43 @@ const Page = () => {
                 </section>
                 <section className="ProductSelector">
                   <span className="ProvidersSingleProduct--selected">
+                    <p style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <svg
+                        version="1.0"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 64 64"
+                        xmlSpace="preserve"
+                        fill="#222"
+                        stroke="#222"
+                        style={{ width: '16px', height: '16px' }}
+                      >
+                        <g id="SVGRepo_bgCarrier" strokeWidth={0} />
+                        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
+                        <g id="SVGRepo_iconCarrier">
+                          <g>
+                            <path
+                              fill="#ffffff"
+                              d="M32,48.001c-14.195,0-21.43-11.734-23.59-15.989C10.574,27.793,17.891,16,32,16 
+          c14.195,0,21.431,11.734,23.591,15.988C53.427,36.208,46.109,48.001,32,48.001z"
+                            />
+                            <g>
+                              <path
+                                fill="#222"
+                                d="M63.716,30.516C63.349,29.594,54.45,8,32,8C9.55,8,0.652,29.594,0.285,30.516
+            c-0.379,0.953-0.379,2.016,0,2.969C0.652,34.407,9.55,56.001,32,56.001c22.45,0,31.349-21.594,31.716-22.517
+            C64.095,32.531,64.095,31.469,63.716,30.516z M32,48.001c-14.195,0-21.43-11.734-23.59-15.989
+            C10.574,27.793,17.891,16,32,16c14.195,0,21.431,11.734,23.591,15.988C53.427,36.208,46.109,48.001,32,48.001z"
+                              />
+                              <circle fill="#222" cx={32} cy={32} r={8} />
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                      {views}
+                    </p>
+
                     <h1>
                       {title}
                       <span className="ProductSelector_EditionLabel" style={{ margin: "0 0 0 3px" }} />
@@ -464,8 +519,8 @@ const Page = () => {
                                       type="button"
                                       onClick={() => setSelectedSize(size)}
                                       className={`border px-4 py-2 rounded transition-all duration-150 ${selectedSize === size
-                                          ? 'bg-blue-600 text-white border-blue-600'
-                                          : 'bg-white text-black'
+                                        ? 'bg-blue-600 text-white border-blue-600'
+                                        : 'bg-white text-black'
                                         }`}
                                     >
                                       {size}
