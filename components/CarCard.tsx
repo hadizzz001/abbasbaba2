@@ -88,7 +88,7 @@ const CarCard = ({ temp }: CarCardProps) => {
                     ) : (
                       <span style={{color:'#398dcc'}}>${price}</span>
                     )}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}>
+                    {/* <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center' }}>
                       <svg
                         version="1.0"
                         id="Layer_1"
@@ -123,7 +123,7 @@ const CarCard = ({ temp }: CarCardProps) => {
                         </g>
                       </svg>
                       <span>{views}</span>
-                    </div>
+                    </div> */}
                     <span className="br_absolute br_inset-0 br_z-10" />
                   </a>
                 </h3>

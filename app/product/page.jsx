@@ -329,7 +329,7 @@ const Page = () => {
                 </section>
                 <section className="ProductSelector">
                   <span className="ProvidersSingleProduct--selected">
-                    <p style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    {/* <p style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                       <svg
                         version="1.0"
                         id="Layer_1"
@@ -364,7 +364,7 @@ const Page = () => {
                         </g>
                       </svg>
                       {views}
-                    </p>
+                    </p> */}
 
                     <h1>
                       {title}
