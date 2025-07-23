@@ -50,7 +50,7 @@ const YourComponent = () => {
   };
 
   return (
-    <div className="ProvidersIfSelectedProductMatchesFilter mb-5">
+    <div className="ProvidersIfSelectedProductMatchesFilter  ">
       {groupedProducts && Object.keys(groupedProducts).length > 0 ? (
         Object.keys(groupedProducts).map((category) => (
           <div key={category}>

@@ -30,7 +30,7 @@ const YourComponent = () => {
 
 
     return (
-        <div className="ProvidersIfSelectedProductMatchesFilter mb-5">
+        <div className="ProvidersIfSelectedProductMatchesFilter  ">
 
             <content-block slug="product-page-wssb">
                 <div className="ProductTile-SliderContainer ProductTile-SliderContainer--YMAL">
