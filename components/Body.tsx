@@ -24,15 +24,15 @@ const Body = () => {
   }, [])
 
 
-  // useEffect(() => {
-  //   const refreshInterval = 2 * 60 * 1000; // 10 minutes in milliseconds
+  useEffect(() => {
+    const refreshInterval = 2 * 60 * 1000; // 10 minutes in milliseconds
 
-  //   const timer = setTimeout(() => {
-  //     window.location.reload(); // Hard refresh
-  //   }, refreshInterval);
+    const timer = setTimeout(() => {
+      window.location.reload(); // Hard refresh
+    }, refreshInterval);
 
-  //   return () => clearTimeout(timer); // Cleanup on unmount
-  // }, []);
+    return () => clearTimeout(timer); // Cleanup on unmount
+  }, []);
 
   return (
 
