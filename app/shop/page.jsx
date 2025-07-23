@@ -8,22 +8,22 @@ const Body = () => {
   const [isActive1, setIsActive1] = useState(true);
   const [checkboxesData, setCheckboxesData] = useState([]);
   const [checkedCategories, setCheckedCategories] = useState([]); // Store selected category IDs
- 
- 
+
+
   const [isCodeValid, setIsCodeValid] = useState(false);
 
   useEffect(() => {
     const storedValidity = localStorage.getItem("isValidCode");
-    console.log("storedValidity ",storedValidity);
+    console.log("storedValidity ", storedValidity);
     if (storedValidity === "true") {
       setIsCodeValid(true);
     } else {
       setIsCodeValid(false);
     }
   }, []);
-  
-  
- 
+
+
+
 
 
 
@@ -92,7 +92,7 @@ const Body = () => {
   }, []);
 
   useEffect(() => {
-    fetchProducts();  
+    fetchProducts();
   }, [checkedCategories]);
 
   const fetchCategories = async () => {
@@ -304,23 +304,24 @@ const Body = () => {
                             <div className="initial:br_row-span-1 br_col-start-1 br_row-start-1 br_relative">
                               <div className="br_aspect-[4/5] sm:br_aspect-square">
                                 <div className="br_w-full br_h-full br_relative br_flex br_items-center br_justify-center">
-                                <div className="relative br_w-full br_h-full br_flex br_justify-center br_items-center">
-                                                                        {item.category === "Hot Sale" && (
-                                                                            <img
-                                                                                src="https://res.cloudinary.com/drupytlml/image/upload/v1740521061/m5fzgzf1a4p6xn3bj1mn.png"
-                                                                                alt="Hot Sale Badge"
-                                                                                className="absolute   left-5 w-30 h-40 sm:w-40 sm:h-40"
-                                                                                style={{ top: "-15px" }}
-                                                                            />
-                                                                        )}
-                                                                        <img
-                                                                            className="br_w-full br_h-full br_object-center br_object-contain br_mx-auto br_max-h-64 sm:br_max-h-72 sm:br_px-4"
-                                                                            loading="lazy"
-                                                                            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
-                                                                            src={item.img[0]?.replace('/upload/', '/upload/w_500/q_auto/f_auto/')}
-                                                                            alt={item.title}
-                                                                        />
-                                                                    </div>
+                                  <div className="relative br_w-full br_h-full br_flex br_justify-center br_items-center">
+                                    {item.category === "Hot Sale" && (
+                                      <img
+                                        src="https://res.cloudinary.com/drupytlml/image/upload/v1740521061/m5fzgzf1a4p6xn3bj1mn.png"
+                                        alt="Hot Sale Badge"
+                                        className="absolute   left-5 w-30 h-40 sm:w-40 sm:h-40"
+                                        style={{ top: "-15px" }}
+                                      />
+                                    )}
+                                    <img
+                                      className="br_w-full br_h-full br_object-center br_object-contain br_mx-auto br_max-h-64 sm:br_max-h-72 sm:br_px-4"
+                                      loading="lazy"
+                                      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
+                                      src={item.img[0]?.replace('/upload/', '/upload/w_500,h_500,c_fill,ar_1:1,q_auto,f_auto/')} 
+
+                                      alt={item.title}
+                                    />
+                                  </div>
 
                                 </div>
                               </div>
@@ -335,7 +336,7 @@ const Body = () => {
 
                                   className="br_text-current br_no-underline"
                                   id='anchorNew'
-                                > 
+                                >
                                   {item.title}
                                   <span className="br_absolute br_inset-0 br_z-10" aria-hidden="true" />
                                 </a>

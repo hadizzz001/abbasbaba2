@@ -31,7 +31,7 @@ const YourComponent = () => {
 
 
     return (
-        <div className="ProvidersIfSelectedProductMatchesFilter">
+        <div className="ProvidersIfSelectedProductMatchesFilter mb-5">
 
             <content-block slug="product-page-wssb">
                 <div className="ProductTile-SliderContainer ProductTile-SliderContainer--YMAL">
@@ -87,7 +87,7 @@ const YourComponent = () => {
                                                     slidesPerView: 3,
                                                 },
                                                 768: {
-                                                    slidesPerView: 6,
+                                                    slidesPerView: 5,
                                                 },
                                             }}>
                                                 <div className="home__cars-wrapper">

@@ -50,7 +50,7 @@ const YourComponent = () => {
   };
 
   return (
-    <div className="ProvidersIfSelectedProductMatchesFilter ">
+    <div className="ProvidersIfSelectedProductMatchesFilter mb-5">
       {groupedProducts && Object.keys(groupedProducts).length > 0 ? (
         Object.keys(groupedProducts).map((category) => (
           <div key={category}>
@@ -105,7 +105,7 @@ const YourComponent = () => {
                     loop
                     breakpoints={{
                       150: { slidesPerView: 3 },
-                      768: { slidesPerView: 6 },
+                      768: { slidesPerView: 5 },
                     }}
                   >
                     <div className="home__cars-wrapper">

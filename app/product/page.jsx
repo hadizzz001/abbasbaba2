@@ -278,18 +278,12 @@ const Page = () => {
 
 
                                           <div className="relative br_w-full br_h-full br_flex br_justify-center br_items-center">
-                                            {cat === "Hot Sale" && (
-                                              <img
-                                                src="https://res.cloudinary.com/drupytlml/image/upload/v1740521061/m5fzgzf1a4p6xn3bj1mn.png"
-                                                alt="Hot Sale Badge"
-                                                className="absolute    w-40 h-40 sm:w-40 sm:h-40"
-                                                style={{ top: "-1em", left: "8em" }}
-                                              />
-                                            )}
-                                            <img
-                                              sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 50vw"
-                                              src={item?.replace('/upload/', '/upload/w_500/q_auto/f_auto/')}
-                                            />
+                                            
+<img
+  src={item?.replace('/upload/', '/upload/w_500,h_500,c_fill,ar_1:1,q_auto,f_auto/')}
+/>
+
+
                                           </div>
 
 
@@ -329,42 +323,7 @@ const Page = () => {
                 </section>
                 <section className="ProductSelector">
                   <span className="ProvidersSingleProduct--selected">
-                    {/* <p style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <svg
-                        version="1.0"
-                        id="Layer_1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                        viewBox="0 0 64 64"
-                        xmlSpace="preserve"
-                        fill="#222"
-                        stroke="#222"
-                        style={{ width: '16px', height: '16px' }}
-                      >
-                        <g id="SVGRepo_bgCarrier" strokeWidth={0} />
-                        <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
-                        <g id="SVGRepo_iconCarrier">
-                          <g>
-                            <path
-                              fill="#ffffff"
-                              d="M32,48.001c-14.195,0-21.43-11.734-23.59-15.989C10.574,27.793,17.891,16,32,16 
-          c14.195,0,21.431,11.734,23.591,15.988C53.427,36.208,46.109,48.001,32,48.001z"
-                            />
-                            <g>
-                              <path
-                                fill="#222"
-                                d="M63.716,30.516C63.349,29.594,54.45,8,32,8C9.55,8,0.652,29.594,0.285,30.516
-            c-0.379,0.953-0.379,2.016,0,2.969C0.652,34.407,9.55,56.001,32,56.001c22.45,0,31.349-21.594,31.716-22.517
-            C64.095,32.531,64.095,31.469,63.716,30.516z M32,48.001c-14.195,0-21.43-11.734-23.59-15.989
-            C10.574,27.793,17.891,16,32,16c14.195,0,21.431,11.734,23.591,15.988C53.427,36.208,46.109,48.001,32,48.001z"
-                              />
-                              <circle fill="#222" cx={32} cy={32} r={8} />
-                            </g>
-                          </g>
-                        </g>
-                      </svg>
-                      {views}
-                    </p> */}
+                     
 
                     <h1>
                       {title}
@@ -379,13 +338,7 @@ const Page = () => {
 
                   </span>
                   <div className="ApexPriceAndFreeShippingWrapper">
-
-
-
-
-
-
-
+ 
 
                     <div>
                       {!isCodeValid ? (
@@ -402,16 +355,7 @@ const Page = () => {
                       )}
                     </div>
 
-
-
-
-
-
-
-
-
-
-
+ 
 
 
                     <div>
@@ -529,16 +473,7 @@ const Page = () => {
                                 </div>
                               </div>
 
-
-
-
-
-
-
-
-
-
-
+ 
                               <div className="">
                                 <span className="ProvidersSingleProduct--selected">
                                   <button type="submit" className="AddToCart HtmlProductAddToCart" style={{ borderRadius: "0" }}>
@@ -597,10 +532,10 @@ const Page = () => {
                           reverseDirection: true
                         }} breakpoints={{
                           150: {
-                            slidesPerView: 1,
+                            slidesPerView: 3,
                           },
                           768: {
-                            slidesPerView: 4,
+                            slidesPerView: 5,
                           },
                         }}>
                           <div className='home__cars-wrapper'>
