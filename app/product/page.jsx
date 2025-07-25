@@ -418,8 +418,8 @@ const Page = () => {
                                   onChange={(e) => setCode(e.target.value)}
                                   style={{ padding: "5px", marginRight: "5px" }}
                                 />
-                                <button onClick={handleCodeSubmit} style={{ padding: "5px 10px" }}>
-                                  Submit
+                                <button onClick={handleCodeSubmit} style={{ fontWeight:"bolder", padding: "5px 10px", backgroundColor: "blue", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}>
+                                  Submit Code!
                                 </button>
                               </>
                             ) : (
