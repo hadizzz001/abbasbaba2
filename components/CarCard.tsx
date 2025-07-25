@@ -52,7 +52,7 @@ const CarCard = ({ temp }: CarCardProps) => {
           <img
             src={imageUrl}
             alt={title}
-            className="w-full h-full object-cover ml-5 mr-5" // <-- zoom/crop instead of white background
+            className="w-full h-full object-cover md:ml-5 md:mr-5" 
           />
         </div>
 
