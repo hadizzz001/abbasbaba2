@@ -280,8 +280,9 @@ const Page = () => {
                                           <div className="relative br_w-full br_h-full br_flex br_justify-center br_items-center">
                                             
 <img
-  src={item?.replace('/upload/', '/upload/w_500,h_500,c_fill,ar_1:1,q_auto,f_auto/')}
+  src={item?.replace('/upload/', '/upload/q_30,f_auto/')}
 />
+
 
 
                                           </div>
