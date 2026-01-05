@@ -170,9 +170,9 @@ const Body = () => {
         <ProductList1 />
         <Design />
         
-        <TikTokEmbed />
+        {/* <TikTokEmbed />
         <FacebookEmbed />
-        <InstagramPost />
+        <InstagramPost /> */}
 
         <style
           type="text/css"

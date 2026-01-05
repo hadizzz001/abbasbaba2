@@ -436,3 +436,17 @@ button:focus {
 
 
 }
+
+
+.floating-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.whatsapp-block {
+  display: block;
+}
+
+.banner-block {
+  display: block;
+}

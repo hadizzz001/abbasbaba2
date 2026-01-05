@@ -18,14 +18,14 @@ const WhatsAppIcon = () => {
       window.open(`https://wa.me/${phoneNumber}`, '_blank');
     }
   };
-
+const isBannerClosed = localStorage.getItem("appBannerClosed") === "true";
   return (
     <a
       href="https://wa.me/9613066976"
       onClick={handleClick}
       style={{
         position: 'fixed',
-        bottom: '70px',
+       bottom: isBannerClosed ? "50px" : "150px",
         right: '20px',
         backgroundColor: '#fff',
         color: '#fff',
