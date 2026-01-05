@@ -183,11 +183,14 @@ const Page = () => {
 
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     const storedValidity = localStorage.getItem("isValidCode");
     setIsCodeValid(storedValidity === "true");
+    }
   }, []);
 
   const handleCodeSubmit = async () => {
+    if (typeof window !== 'undefined') {
     try {
       const response = await fetch("https://abbasbaba-dash.netlify.app/api/code");
       if (!response.ok) throw new Error("Failed to fetch codes");
@@ -215,6 +218,7 @@ const Page = () => {
     } catch (error) {
       console.error("Failed to submit code:", error);
       alert("Something went wrong.");
+    }
     }
   };
 

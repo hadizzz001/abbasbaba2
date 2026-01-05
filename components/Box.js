@@ -9,9 +9,11 @@ const OfferBox = () => {
 
   // Check localStorage on mount
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     const closed = localStorage.getItem("offerClosed");
     if (closed === "true") {
       setIsVisible(false);
+    }
     }
   }, []);
 
@@ -60,6 +62,7 @@ const OfferBox = () => {
 
   // Close when clicking outside
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     const handleClickOutside = (e) => {
       if (boxRef.current && !boxRef.current.contains(e.target)) {
         setIsVisible(false);
@@ -69,12 +72,15 @@ const OfferBox = () => {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
   }, []);
 
   // Manual close handler
   const handleClose = () => {
+    if (typeof window !== 'undefined') {
     setIsVisible(false);
     localStorage.setItem("offerClosed", "true");
+    }
   };
 
   if (!isVisible) return null;

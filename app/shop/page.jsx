@@ -13,12 +13,14 @@ const Body = () => {
   const [isCodeValid, setIsCodeValid] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     const storedValidity = localStorage.getItem("isValidCode");
     console.log("storedValidity ", storedValidity);
     if (storedValidity === "true") {
       setIsCodeValid(true);
     } else {
       setIsCodeValid(false);
+    }
     }
   }, []);
 

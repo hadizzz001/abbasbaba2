@@ -4,15 +4,19 @@ export default function MobileAppBanner() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     const bannerClosed = localStorage.getItem("appBannerClosed");
     if (!bannerClosed) {
       setIsVisible(true);
     }
+    }
   }, []);
 
   const handleClose = () => {
+    if (typeof window !== 'undefined') {
     setIsVisible(false);
     localStorage.setItem("appBannerClosed", "true");
+    }
   };
 
   if (!isVisible) return null;

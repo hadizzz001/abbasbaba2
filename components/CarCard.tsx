@@ -14,7 +14,9 @@ const CarCard = ({ temp }: CarCardProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
     setIsCodeValid(localStorage.getItem("isValidCode") === "true");
+    }
   }, []);
 
   useEffect(() => {
