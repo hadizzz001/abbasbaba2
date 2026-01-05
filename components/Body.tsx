@@ -5,6 +5,7 @@ import ProductList1 from './ProductList1';
 import ProductArrival from './ProductArrival';  
 import Contact from './Contact'; 
 import Design from './Design';
+import Design1 from './Design1';
 import Review from './Review';
 import Rate from './Rate';
 import Carousel from './Carousel';
@@ -15,6 +16,7 @@ import Catslider from './Catslider';
 import TikTokEmbed from './TikTokEmbed';
 import FacebookEmbed from './FacebookEmbed';
 import InstagramPost from './InstagramPost';  
+import GetOurApp from './GetOurApp';  
 
 
 
@@ -169,6 +171,8 @@ const Body = () => {
         <Carousel1 />
         <ProductList1 />
         <Design />
+
+         <GetOurApp />
         
         {/* <TikTokEmbed />
         <FacebookEmbed />
